@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ArcballControls, useGLTF, Environment } from '@react-three/drei';
+import modelPath from '../assets/model/neoarm.glb?url';
 
 function Model(props) {
-    const { scene } = useGLTF('/src/assets/model/neoarm.glb');
+    const { scene } = useGLTF(modelPath);
     return <primitive object={scene} {...props} />;
 }
 
