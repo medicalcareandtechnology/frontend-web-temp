@@ -24,7 +24,7 @@ const ContactPage = () => {
         e.preventDefault();
         setStatus('submitting');
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxwYWlZlUUX_DLLAOaUFoHy32x0jy48e045Y-D8GspViMlTfZbsNAyWyrp3LySyMd0QVg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzHR9z5LnlgOhmI0m77kn-npLDoIaJ2BsfKZocJE93bdS4P7TsYF-tBs4narbCUpszb/exec';
         const form = new FormData();
         form.append('name', formData.name);
         form.append('email', formData.email);
