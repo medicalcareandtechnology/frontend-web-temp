@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0a0a0a;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Custom Font Classes for NeoMotion Branding */
+.font-baumans {
+  font-family: 'Baumans', system-ui, sans-serif;
+}
+
+.font-genos {
+  font-family: 'Genos', system-ui, sans-serif;
+}
+
+.font-special-gothic {
+  font-family: 'Special Gothic Expanded One', system-ui, sans-serif;
+}
+
+.font-syne-mono {
+  font-family: 'Syne Mono', monospace;
+}
+
+.font-barlow {
+  font-family: 'Barlow', system-ui, sans-serif;
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+.font-major-mono {
+  font-family: 'Major Mono Display', monospace;
+}
