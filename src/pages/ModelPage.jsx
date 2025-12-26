@@ -1,5 +1,5 @@
 import React from 'react';
-import ModelViewer from './ModelViewer';
+import ModelViewer from '../components/ModelViewer';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 

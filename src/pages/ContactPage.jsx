@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { submitContactForm } from '../services/api';
 
 const ContactPage = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const ContactPage = () => {
         message: ''
     });
     const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -23,30 +25,30 @@ const ContactPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('submitting');
-
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzHR9z5LnlgOhmI0m77kn-npLDoIaJ2BsfKZocJE93bdS4P7TsYF-tBs4narbCUpszb/exec';
-        const form = new FormData();
-        form.append('name', formData.name);
-        form.append('email', formData.email);
-        form.append('phone', formData.phone);
-        form.append('message', formData.message);
-        // Date is handled by the script, but we can send it just in case or remove it if not needed by script logic
-        // The provided script ignores client date and uses server date for 'Date' header
-        form.append('date', new Date().toLocaleString());
+        setErrorMessage('');
 
         try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                body: form,
-                mode: 'no-cors' // Important to avoid CORS errors with Google Apps Script
-            });
-            setStatus('success');
-            setFormData({ name: '', email: '', phone: '', message: '' });
+            const response = await submitContactForm(formData);
+
+            if (response.success) {
+                setStatus('success');
+                setFormData({ name: '', email: '', phone: '', message: '' });
+
+                // Reset success message after 5 seconds
+                setTimeout(() => {
+                    setStatus('idle');
+                }, 5000);
+            } else {
+                setStatus('error');
+                setErrorMessage(response.message || 'Something went wrong. Please try again.');
+            }
         } catch (error) {
-            console.error('Error!', error.message);
+            console.error('Error submitting form:', error);
             setStatus('error');
+            setErrorMessage(error.message || 'Unable to submit form. Please try again later.');
         }
     };
+
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans relative overflow-hidden">
@@ -161,8 +163,8 @@ const ContactPage = () => {
                                 type="submit"
                                 disabled={status === 'submitting'}
                                 className={`w-full font-semibold py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 group ${status === 'submitting'
-                                        ? 'bg-blue-600/50 cursor-not-allowed'
-                                        : 'bg-blue-600 hover:bg-blue-500 text-white'
+                                    ? 'bg-blue-600/50 cursor-not-allowed'
+                                    : 'bg-blue-600 hover:bg-blue-500 text-white'
                                     }`}
                             >
                                 {status === 'submitting' ? (
@@ -190,10 +192,10 @@ const ContactPage = () => {
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="flex items-center justify-center space-x-2 text-red-400 text-sm mt-4"
+                                    className="flex items-start space-x-2 text-red-400 text-sm mt-4 bg-red-500/10 p-3 rounded-lg border border-red-500/20"
                                 >
-                                    <AlertCircle className="w-4 h-4" />
-                                    <span>Something went wrong. Please try again.</span>
+                                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                                    <span>{errorMessage || 'Something went wrong. Please try again.'}</span>
                                 </motion.div>
                             )}
 

@@ -16,7 +16,7 @@ const About = () => {
                         transition={{ duration: 0.6 }}
                         className="text-3xl md:text-4xl font-bold text-white mb-8"
                     >
-                        About Us
+                        Vision
                     </motion.h2>
 
                     <motion.p
