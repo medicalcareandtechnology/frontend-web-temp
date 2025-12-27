@@ -1,0 +1,85 @@
+.chatbot-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  border: 2px solid #03045e;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 119, 182, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.chatbot-toggle-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%);
+  border-color: #03045e;
+  box-shadow: 0 6px 30px rgba(0, 119, 182, 0.6);
+  animation: none;
+}
+
+.chatbot-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.chatbot-toggle-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.chatbot-badge {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  background: #ff4757;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+  animation: slideInBadge 0.5s ease-out 0.5s both;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 119, 182, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(0, 180, 216, 0.7);
+  }
+}
+
+@keyframes slideInBadge {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .chatbot-toggle-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .chatbot-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
