@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 const ComingSoon = () => {
+    const [email, setEmail] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (email) {
+            setIsSubmitted(true);
+            // Here you would typically send the email to your backend
+            console.log("Email submitted:", email);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-black text-white">
             <Navbar darkMode={true} />
@@ -34,6 +46,46 @@ const ComingSoon = () => {
                             We're preparing something special. The Ease Band will be available for purchase soon.
                         </p>
 
+                        {/* Notify Me Form or Success Message */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="max-w-md mx-auto mb-16"
+                        >
+                            {!isSubmitted ? (
+                                <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                        className="flex-1 bg-transparent border border-white/30 text-white px-6 py-4 outline-none focus:border-white transition-colors placeholder:text-gray-600 font-light"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-white text-black px-8 py-4 font-medium tracking-[0.2em] uppercase hover:bg-gray-200 transition-colors"
+                                    >
+                                        Notify Me
+                                    </button>
+                                </form>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="py-4"
+                                >
+                                    <p className="text-white text-lg tracking-[0.1em] font-light font-serif italic mb-2">
+                                        Thank you.
+                                    </p>
+                                    <p className="text-gray-400 text-sm tracking-widest uppercase font-light">
+                                        We will notify you when Ease Band is available.
+                                    </p>
+                                </motion.div>
+                            )}
+                        </motion.div>
+
                         {/* Divider Line */}
                         <motion.div
                             initial={{ scaleX: 0 }}
@@ -50,7 +102,7 @@ const ComingSoon = () => {
                         >
                             <Link
                                 to="/"
-                                className="inline-block px-12 py-4 border border-white text-white text-sm font-medium tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500"
+                                className="inline-block text-gray-500 text-sm font-medium tracking-[0.2em] uppercase hover:text-white transition-colors duration-300"
                             >
                                 Back to Home
                             </Link>

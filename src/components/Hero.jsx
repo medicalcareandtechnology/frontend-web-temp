@@ -24,55 +24,56 @@ const Hero = () => {
                 className="absolute inset-0 z-0"
                 style={{ scale }}
             >
-                <div className="absolute inset-0 bg-black/40 z-10" style={{ transform: 'scale(1.2)' }} />
+                <div className="absolute inset-0 bg-black/30 z-10" />
                 <div
                     className="w-full h-full bg-cover bg-center"
                     style={{
-                        backgroundImage: `url(/src/assets/ease_band.png)`,
-                        transform: `translateY(${scrollY * 0.5}px) scale(1.2)`
+                        backgroundImage: `url(/src/assets/packaging_box.jpg)`,
+                        transform: `translateY(${scrollY * 0.3}px)`
                     }}
                 />
             </motion.div>
 
-            {/* Large Brand Text - Luxury Style */}
+            {/* Product-First Hero Content */}
             <div className="container mx-auto px-6 relative z-20 text-center">
                 <motion.div
                     style={{ opacity }}
-                    className="space-y-12"
+                    className="space-y-8"
                 >
-                    {/* Massive Brand Name */}
+                    {/* Hero Product Name - The Star */}
                     <motion.h1
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2, delay: 0.3, ease: [0.6, 0.05, 0.01, 0.9] }}
-                        className="text-8xl md:text-[12rem] font-light text-white tracking-[0.3em] leading-none font-serif"
+                        className="text-7xl md:text-[10rem] font-light text-white tracking-[0.15em] leading-none"
                     >
-                        MCT
+                        Ease Band
                     </motion.h1>
+
+                    {/* Impactful Product Quote */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                        className="text-xl md:text-2xl text-white/90 font-light italic max-w-3xl mx-auto leading-relaxed"
+                    >
+                        "Relief that moves with you. Freedom that stays with you."
+                    </motion.p>
 
                     {/* Divider Line */}
                     <motion.div
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ duration: 1, delay: 0.8 }}
-                        className="h-px bg-white/30 max-w-md mx-auto"
+                        transition={{ duration: 1, delay: 1 }}
+                        className="h-px bg-white/30 max-w-sm mx-auto"
                     />
 
-                    {/* Subtitle */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1 }}
-                        className="text-2xl md:text-3xl text-white font-light tracking-[0.2em] uppercase"
-                    >
-                        Ease Band
-                    </motion.p>
-
+                    {/* Product Description */}
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1.3 }}
-                        className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed"
+                        transition={{ duration: 1, delay: 1.2 }}
+                        className="text-base md:text-lg text-gray-300 font-light max-w-2xl mx-auto leading-relaxed"
                     >
                         Medical-grade relief for menstrual pain. Because comfort shouldn't be a luxury.
                     </motion.p>
@@ -81,8 +82,8 @@ const Hero = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1.5 }}
-                        className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
+                        transition={{ duration: 1, delay: 1.4 }}
+                        className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6"
                     >
                         <a
                             href="/shop"
@@ -100,6 +101,21 @@ const Hero = () => {
                         >
                             Contact
                         </a>
+                    </motion.div>
+
+                    {/* Company Signature - Subtle Brand Placement */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1.8 }}
+                        className="pt-8"
+                    >
+                        <p className="text-sm text-white/50 tracking-[0.3em] uppercase font-light">
+                            by
+                        </p>
+                        <p className="text-lg md:text-xl text-white/70 tracking-[0.4em] font-light mt-1 font-serif">
+                            MCT
+                        </p>
                     </motion.div>
                 </motion.div>
             </div>
