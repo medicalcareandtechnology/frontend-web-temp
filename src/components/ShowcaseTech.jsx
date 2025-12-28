@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import techLayersImage from '../assets/tech_layers.jpg';
-import productFloatingImage from '../assets/product_floating.jpg';
-import lifestyleWearingImage from '../assets/lifestyle_wearing.jpg';
+
+
+
 
 const ShowcaseTech = () => {
     return (
@@ -53,7 +53,7 @@ const ShowcaseTech = () => {
                             <div className="absolute -inset-2 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
                             <div className="relative overflow-hidden border border-white/10 h-full min-h-[500px]">
                                 <img
-                                    src={techLayersImage}
+                                    src="https://res.cloudinary.com/dkganhypn/image/upload/v1766934940/layers_niv9is.jpg"
                                     alt="Ease Band Technology Layers"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
@@ -89,7 +89,7 @@ const ShowcaseTech = () => {
                                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
                                 <div className="relative overflow-hidden border border-white/10 h-full min-h-[240px]">
                                     <img
-                                        src={productFloatingImage}
+                                        src="https://res.cloudinary.com/dkganhypn/image/upload/v1766934940/pic2_vjwyyy.jpg"
                                         alt="Ease Band Product"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
@@ -159,10 +159,13 @@ const ShowcaseTech = () => {
                             >
                                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
                                 <div className="relative overflow-hidden border border-white/10 h-full min-h-[240px]">
-                                    <img
-                                        src={lifestyleWearingImage}
-                                        alt="Ease Band Being Worn"
+                                    <video
+                                        src="https://res.cloudinary.com/dkganhypn/video/upload/v1766934940/WhatsApp_Video_2025-12-28_at_2.51.42_PM_riprfq.mp4"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
                                         <p className="text-xs uppercase tracking-[0.2em] text-white/80">Discreet & Comfortable</p>
@@ -173,13 +176,33 @@ const ShowcaseTech = () => {
                     </div>
                 </div>
 
+                {/* Buy Now Button */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                    className="flex justify-center mt-20"
+                >
+                    <a
+                        href="/shop"
+                        className="group relative px-12 py-4 bg-white text-black font-medium uppercase tracking-[0.2em] text-sm overflow-hidden transition-all duration-500 hover:tracking-[0.3em]"
+                    >
+                        <span className="relative z-10">Shop Now</span>
+                        <div className="absolute inset-0 bg-zinc-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 tracking-[0.3em]">
+                            Shop Now
+                        </span>
+                    </a>
+                </motion.div>
+
                 {/* Bottom Accent */}
                 <motion.div
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.8 }}
-                    className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-24"
+                    className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-16"
                 />
             </div>
         </section>

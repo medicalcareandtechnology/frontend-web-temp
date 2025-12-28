@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import productWithBoxImage from '../assets/product_with_box.jpg';
+
 
 const ProductShowcase = () => {
     return (
@@ -23,7 +23,7 @@ const ProductShowcase = () => {
 
                             <div className="relative p-8 bg-gradient-to-br from-blue-50 to-white">
                                 <img
-                                    src={productWithBoxImage}
+                                    src="https://res.cloudinary.com/dkganhypn/image/upload/v1766934940/pic1_mrjyiv.jpg"
                                     alt="Ease Band Device"
                                     className="w-full"
                                 />

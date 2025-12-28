@@ -28,7 +28,7 @@ const Hero = () => {
                 <div
                     className="w-full h-full bg-cover bg-center"
                     style={{
-                        backgroundImage: `url(/src/assets/packaging_box.jpg)`,
+                        backgroundImage: `url("https://res.cloudinary.com/dkganhypn/image/upload/v1766934939/pic3_v8qvf8.jpg")`,
                         transform: `translateY(${scrollY * 0.3}px)`
                     }}
                 />
