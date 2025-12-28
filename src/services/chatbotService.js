@@ -16,20 +16,37 @@ try {
 
 // Contact information for fallback
 const CONTACT_INFO = {
-  email: 'support@yourcompany.com',
-  phone: '+1 (555) 123-4567',
-  name: 'Customer Support Team'
+  email: 'rohitks1124@gmail.com',
+  phone: '8699715686',
+  name: 'MCT Support Team'
 };
 
 // System prompt for the chatbot
-const SYSTEM_PROMPT = `You are a helpful medical assistant chatbot for a Medical Care and Technology company. 
-Your role is to answer questions about medical devices, healthcare solutions, appointments, and general health-related inquiries.
-Be friendly, professional, empathetic, and concise in your responses.
+const SYSTEM_PROMPT = `You are a helpful medical assistant chatbot for MCT (Medical Care and Technology), a company dedicated to improving women's health through innovative medical devices.
 
-If a customer asks about something you cannot help with (like specific medical diagnoses, prescriptions, or emergency situations), 
-respond with: "I apologize, but I'm not able to assist with that specific issue. Please contact our ${CONTACT_INFO.name} at ${CONTACT_INFO.email} or call ${CONTACT_INFO.phone} for personalized medical assistance. For emergencies, please call your local emergency services immediately."
+Our flagship product is the Ease Band - a wearable device designed to provide relief from menstrual cramps using:
+- Advanced heat therapy (heats up to 45°C in 15 seconds)
+- Precision massage technology (3 distinct vibration patterns)
+- Medical-grade materials that are skin-safe and breathable
+- Ultra-thin, discreet design that's unnoticeable under clothes
+- 8-hour battery life for all-day relief
 
-Keep your responses brief, helpful, and professional.`;
+Your role is to:
+- Answer questions about the Ease Band's features, benefits, and how it works
+- Provide information about menstrual pain relief
+- Direct users to purchase or contact channels
+- Be empathetic, professional, and supportive
+
+Key messaging:
+- Ease Band provides clinically-proven relief for period cramps
+- It's designed to be invisible under clothes but powerful when needed
+- Combines medical-grade effectiveness with beautiful, thoughtful design
+- Helps women feel their best every day of the month
+
+If asked about medical diagnoses, prescriptions, or emergencies, respond with: 
+"I apologize, but I'm not able to provide medical advice. For personal medical concerns, please consult with your healthcare provider. For questions about the Ease Band, feel free to contact us at ${CONTACT_INFO.email} or call ${CONTACT_INFO.phone}. For emergencies, please call your local emergency services immediately."
+
+Keep responses brief, warm, empathetic, and professional.`;
 
 export const sendChatMessage = async (messages) => {
   try {
@@ -64,7 +81,7 @@ export const sendChatMessage = async (messages) => {
       status: error.status,
       error: error.error
     });
-    
+
     // Handle specific API errors
     if (error.status === 401) {
       return {
@@ -72,14 +89,14 @@ export const sendChatMessage = async (messages) => {
         message: 'Invalid API key. Please check your Groq API configuration.'
       };
     }
-    
+
     if (error.status === 429) {
       return {
         success: false,
         message: 'Rate limit exceeded. Please try again in a moment.'
       };
     }
-    
+
     // Handle API key errors
     if (error.message?.includes('API key') || error.message?.includes('api_key')) {
       return {
@@ -87,7 +104,7 @@ export const sendChatMessage = async (messages) => {
         message: 'Chatbot configuration error. Please contact support.'
       };
     }
-    
+
     return {
       success: false,
       message: 'Sorry, I encountered an error. Please try again later.'

@@ -1,39 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Zap, Hand, Activity, Boxes, Droplets, Layers, Link2 } from 'lucide-react';
+import { Thermometer, Waves, EyeOff, Battery, Feather, Shield } from 'lucide-react';
 
 const features = [
     {
-        icon: <Smartphone className="w-8 h-8" />,
-        title: 'USER INTERFACE',
+        icon: <Thermometer className="w-8 h-8" />,
+        title: 'INSTANT HEAT',
     },
     {
-        icon: <Zap className="w-8 h-8" />,
-        title: 'MULTIPLE MODES',
+        icon: <Waves className="w-8 h-8" />,
+        title: 'GENTLE MASSAGE',
     },
     {
-        icon: <Hand className="w-8 h-8" />,
-        title: 'ADAPTIVE GRIP',
+        icon: <EyeOff className="w-8 h-8" />,
+        title: 'DISCREET DESIGN',
     },
     {
-        icon: <Activity className="w-8 h-8" />,
-        title: 'HAPTIC FEEDBACK',
+        icon: <Battery className="w-8 h-8" />,
+        title: 'ALL-DAY BATTERY',
     },
     {
-        icon: <Boxes className="w-8 h-8" />,
-        title: 'MODULAR DESIGN',
+        icon: <Feather className="w-8 h-8" />,
+        title: 'LIGHTWEIGHT',
     },
     {
-        icon: <Droplets className="w-8 h-8" />,
-        title: 'WATER RESISTANT',
-    },
-    {
-        icon: <Layers className="w-8 h-8" />,
-        title: 'SILICON SKIN',
-    },
-    {
-        icon: <Link2 className="w-8 h-8" />,
-        title: 'SECURE FIT',
+        icon: <Shield className="w-8 h-8" />,
+        title: 'SKIN-SAFE',
     },
 ];
 
