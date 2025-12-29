@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import lifestyleImage from '../assets/lifestyle.png';
+
 
 const ShowcaseLifestyle = () => {
     return (
@@ -9,13 +9,26 @@ const ShowcaseLifestyle = () => {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <img
-                    src={lifestyleImage}
+                    src="https://res.cloudinary.com/dkganhypn/image/upload/v1766939130/ChatGPT_Image_Dec_28_2025_09_53_56_PM_sh75ov.png"
                     alt="Woman experiencing relief"
                     className="w-full h-full object-cover object-[center_top]"
                 />
                 {/* Refined Gradient - More subtle */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/70" />
             </div>
+
+            {/* Subtle product context caption - positioned near waist */}
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="hidden sm:flex items-center gap-2 text-[0.65rem] md:text-xs tracking-[0.3em] uppercase text-white/60 absolute z-10"
+                style={{ top: 'calc(55% + 280px)', right: '300px' }}
+            >
+                <span className="w-6 h-px bg-white/40" />
+                <span>Wearing Ease Band</span>
+            </motion.div>
 
             <div className="container mx-auto px-6 md:px-12 relative z-10">
                 <motion.div
@@ -58,11 +71,11 @@ const ShowcaseLifestyle = () => {
                             <div className="flex gap-8 md:gap-12 pt-6 md:pt-8 border-t border-white/20">
                                 <div>
                                     <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide">Silent</div>
-                                    <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">Operation</div>
+                                    <div className="text-xs text-gray-200 uppercase tracking-[0.2em]">Heat Therapy</div>
                                 </div>
                                 <div>
-                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide">Invisible</div>
-                                    <div className="text-xs text-gray-400 uppercase tracking-[0.2em]">Design</div>
+                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide">Discreet</div>
+                                    <div className="text-xs text-gray-200 uppercase tracking-[0.2em]">Under Clothing</div>
                                 </div>
                             </div>
                         </div>

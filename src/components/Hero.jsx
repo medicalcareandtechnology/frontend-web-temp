@@ -15,7 +15,7 @@ const Hero = () => {
     }, []);
 
     const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
+    const scale = useTransform(scrollYProgress, [0, 0.3], [1.2, 1]);
 
     return (
         <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -28,7 +28,7 @@ const Hero = () => {
                 <div
                     className="w-full h-full bg-cover bg-center"
                     style={{
-                        backgroundImage: `url("https://res.cloudinary.com/dkganhypn/image/upload/v1766934939/pic3_v8qvf8.jpg")`,
+                        backgroundImage: `url("https://res.cloudinary.com/dkganhypn/image/upload/v1766937813/ChatGPT_Image_Dec_28_2025_09_32_44_PM_mard9h.png")`,
                         transform: `translateY(${scrollY * 0.3}px)`
                     }}
                 />
@@ -57,7 +57,7 @@ const Hero = () => {
                         transition={{ duration: 1, delay: 0.8 }}
                         className="text-xl md:text-2xl text-white/90 font-light italic max-w-3xl mx-auto leading-relaxed"
                     >
-                        "Relief that moves with you. Freedom that stays with you."
+                        A wearable relief band designed to ease menstrual cramps
                     </motion.p>
 
                     {/* Divider Line */}
@@ -75,7 +75,7 @@ const Hero = () => {
                         transition={{ duration: 1, delay: 1.2 }}
                         className="text-base md:text-lg text-gray-300 font-light max-w-2xl mx-auto leading-relaxed"
                     >
-                        Medical-grade relief for menstrual pain. Because comfort shouldn't be a luxury.
+                        "Relief that moves with you. Freedom that stays with you."
                     </motion.p>
 
                     {/* CTA Buttons */}
@@ -86,13 +86,13 @@ const Hero = () => {
                         className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6"
                     >
                         <a
-                            href="/shop"
+                            href="#product-showcase"
                             className="group relative px-12 py-4 bg-white text-black font-medium uppercase tracking-[0.2em] text-sm overflow-hidden transition-all duration-500 hover:tracking-[0.3em]"
                         >
-                            <span className="relative z-10">Shop Now</span>
+                            <span className="relative z-10">Learn More</span>
                             <div className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 tracking-[0.3em]">
-                                Shop Now
+                                Learn More
                             </span>
                         </a>
                         <a

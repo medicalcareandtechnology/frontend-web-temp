@@ -34,7 +34,7 @@ const ShowcaseTech = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-lg text-gray-400 font-light leading-relaxed"
                     >
-                        Clinically-proven heat therapy meets precision massage technology. Designed to interrupt pain signals and promote natural muscle relaxation during menstruation.
+                        Clinically inspired heat therapy meets precision massage technology. Designed to reduce pain signal intensity and promote natural muscle relaxation during menstruation.
                     </motion.p>
                 </div>
 
@@ -64,7 +64,7 @@ const ShowcaseTech = () => {
                                         whileHover={{ scale: 1.05 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        45°C
+                                        45°C (safe, regulated warmth)
                                     </motion.div>
                                     <div className="h-px w-16 bg-blue-500 mb-4" />
                                     <h3 className="text-lg font-light text-white mb-2 tracking-[0.1em] uppercase">Smart Heating</h3>
@@ -175,26 +175,6 @@ const ShowcaseTech = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* Buy Now Button */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.7 }}
-                    className="flex justify-center mt-20"
-                >
-                    <a
-                        href="/shop"
-                        className="group relative px-12 py-4 bg-white text-black font-medium uppercase tracking-[0.2em] text-sm overflow-hidden transition-all duration-500 hover:tracking-[0.3em]"
-                    >
-                        <span className="relative z-10">Shop Now</span>
-                        <div className="absolute inset-0 bg-zinc-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                        <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 tracking-[0.3em]">
-                            Shop Now
-                        </span>
-                    </a>
-                </motion.div>
 
                 {/* Bottom Accent */}
                 <motion.div

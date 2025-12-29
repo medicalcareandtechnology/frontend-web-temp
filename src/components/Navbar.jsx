@@ -23,7 +23,7 @@ const Navbar = ({ darkMode = false }) => {
     return (
         <motion.nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
-                ? 'bg-black/95 backdrop-blur-xl py-4 border-b border-white/5'
+                ? 'bg-black/95 backdrop-blur-xl py-4'
                 : 'bg-transparent py-8'
                 }`}
         >

@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 
 const ProductShowcase = () => {
     return (
-        <section className="py-32 bg-white relative overflow-hidden">
+        <section id="product-showcase" className="py-32 bg-white relative overflow-hidden">
 
             <div className="container mx-auto px-6 md:px-12 relative z-10">
-                <div className="flex flex-col md:flex-row items-center gap-16">
+                <div className="flex flex-col md:flex-row items-start gap-12 lg:gap-16">
                     {/* Image Section - Luxury Frame */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -37,7 +37,7 @@ const ProductShowcase = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="w-full md:w-1/2 space-y-8"
+                        className="w-full md:w-1/2 space-y-8 flex flex-col justify-start"
                     >
                         <div>
                             <motion.div
@@ -79,24 +79,16 @@ const ProductShowcase = () => {
                             ))}
                         </div>
 
-                        {/* CTA - Luxury Button */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                        {/* Closing statement - no CTA here */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 1 }}
-                            className="pt-8"
+                            transition={{ duration: 0.8, delay: 1.1 }}
+                            className="pt-8 text-lg md:text-xl text-gray-700 font-light italic"
                         >
-                            <a
-                                href="/shop"
-                                className="group inline-block relative px-12 py-4 border-2 border-black overflow-hidden"
-                            >
-                                <span className="relative z-10 text-black text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-white">
-                                    Shop Now
-                                </span>
-                                <div className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                            </a>
-                        </motion.div>
+                            Experience the difference.
+                        </motion.p>
                     </motion.div>
                 </div>
             </div>

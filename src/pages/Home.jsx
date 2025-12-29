@@ -5,6 +5,7 @@ import About from '../components/About';
 import ProductShowcase from '../components/ProductShowcase';
 import ShowcaseLifestyle from '../components/ShowcaseLifestyle';
 import ShowcaseTech from '../components/ShowcaseTech';
+import LifestyleUsage from '../components/LifestyleUsage';
 import Footer from '../components/Footer';
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
             <ProductShowcase />
             <ShowcaseLifestyle />
             <ShowcaseTech />
+            <LifestyleUsage />
             <About />
             <Footer />
         </div>
