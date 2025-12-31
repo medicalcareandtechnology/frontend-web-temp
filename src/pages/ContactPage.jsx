@@ -28,7 +28,7 @@ const ContactPage = () => {
         setErrorMessage('');
 
         try {
-            const response = await axios.post('http://localhost:5001/contact',formData);
+            const response = await axios.post("https://backend-web-tempp.vercel.app/contact",formData);
 
             if (response.data.success) {
                 setStatus('success');
