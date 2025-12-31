@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { submitContactForm } from '../services/api';
-
+import axios from 'axios'
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -28,9 +28,9 @@ const ContactPage = () => {
         setErrorMessage('');
 
         try {
-            const response = await submitContactForm(formData);
+            const response = await axios.post('http://localhost:5001/contact',formData);
 
-            if (response.success) {
+            if (response.data.success) {
                 setStatus('success');
                 setFormData({ name: '', email: '', phone: '', message: '' });
 
@@ -40,7 +40,7 @@ const ContactPage = () => {
                 }, 5000);
             } else {
                 setStatus('error');
-                setErrorMessage(response.message || 'Something went wrong. Please try again.');
+                setErrorMessage(response.data.message || 'Something went wrong. Please try again.');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
