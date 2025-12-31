@@ -79,16 +79,7 @@ const ProductShowcase = () => {
                             ))}
                         </div>
 
-                        {/* Closing statement - no CTA here */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 1.1 }}
-                            className="pt-8 text-lg md:text-xl text-gray-700 font-light italic"
-                        >
-                            Experience the difference.
-                        </motion.p>
+
                     </motion.div>
                 </div>
             </div>
