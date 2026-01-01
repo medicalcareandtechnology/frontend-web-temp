@@ -76,6 +76,47 @@ class ApiService {
             method: 'GET',
         });
     }
+
+    /**
+     * Subscribe to newsletter
+     * @param {string} email - User's email
+     * @returns {Promise<object>} Response from server
+     */
+    async subscribeToNewsletter(email) {
+        const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+        if (!scriptUrl) {
+            console.error('Google Script URL not configured');
+            throw new Error('Configuration error');
+        }
+
+        // Google Apps Script requires no-cors for simple posts usually, or specific handling
+        // but typically standard fetch works if the script returns JSON and CORS is handled there (web app set to 'Anyone').
+        // However, 'no-cors' mode might be needed if we don't care about response body reading in strict environments.
+        // Let's try standard POST. The provided script returns JSON.
+
+        // Note: fetch to Google Apps Script often needs 'no-cors' if CORS headers aren't perfect, 
+        // but 'no-cors' makes the response opaque.
+        // Usually, to get a result, we use a workaround or form submission.
+        // Let's use simple fetch with mode 'no-cors' if we just want to submit, but we can't check success easily.
+        // BUT, if the script is deployed as "Anyone", it usually supports CORS if returning the right headers/content type.
+        // The provided script returns `ContentService.createTextOutput...setMimeType(JSON)`. 
+        // Google Apps Script usually handles CORS redirects automatically.
+
+        // Debugging: Log the URL to ensure it's loaded
+        console.log('Sending to Google Script:', scriptUrl);
+
+        // using text/plain for the Content-Type to ensure successful transmission 
+        // with mode: 'no-cors' which prevents preflight checks and header stripping issues.
+        // The Google Apps Script will still parse the JSON string body.
+        return fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: JSON.stringify({ email }),
+        });
+    }
 }
 
 // Export a singleton instance
@@ -85,3 +126,4 @@ export default apiService;
 // Named exports for specific functions
 export const submitContactForm = (formData) => apiService.submitContactForm(formData);
 export const checkApiHealth = () => apiService.checkHealth();
+export const subscribeToNewsletter = (email) => apiService.subscribeToNewsletter(email);
