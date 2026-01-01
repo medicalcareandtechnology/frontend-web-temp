@@ -65,13 +65,7 @@ const Navbar = ({ darkMode = false }) => {
                         Home
                         <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
                     </Link>
-                    <Link
-                        to="/about"
-                        className="group relative text-white text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em]"
-                    >
-                        About
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
-                    </Link>
+
                     <a
                         href="#features"
                         className="group relative text-white text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em]"
@@ -127,13 +121,7 @@ const Navbar = ({ darkMode = false }) => {
                             >
                                 Home
                             </Link>
-                            <Link
-                                to="/about"
-                                className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                About
-                            </Link>
+
                             <a
                                 href="#features"
                                 className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"

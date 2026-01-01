@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import About from '../components/About';
+
 import ProductShowcase from '../components/ProductShowcase';
 import ShowcaseLifestyle from '../components/ShowcaseLifestyle';
 import ShowcaseTech from '../components/ShowcaseTech';
@@ -17,7 +17,7 @@ function Home() {
             <ShowcaseLifestyle />
             <ShowcaseTech />
             <LifestyleUsage />
-            <About />
+
             <Footer />
         </div>
     );

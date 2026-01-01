@@ -4,7 +4,6 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ContactPage from './pages/ContactPage';
-import AboutPage from './pages/AboutPage';
 import ComingSoon from './pages/ComingSoon';
 import Chatbot from './components/Chatbot';
 import ChatbotButton from './components/ChatbotButton';
@@ -22,7 +21,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/shop" element={<ComingSoon />} />
       </Routes>
