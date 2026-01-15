@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = ({ darkMode = false }) => {
+const Navbar = ({ useDarkText = false }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { scrollY } = useScroll();
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+    const isShopPage = location.pathname === '/shop';
+    const isContactPage = location.pathname === '/contact';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,6 +23,11 @@ const Navbar = ({ darkMode = false }) => {
     // Logo transforms based on scroll
     const logoScale = useTransform(scrollY, [0, 100], [1, 0.85]);
     const logoOpacity = useTransform(scrollY, [0, 50], [0, 1]);
+
+    // Dynamic classes based on scroll and theme
+    const textColorClass = isScrolled || !useDarkText ? "text-white" : "text-black";
+    const borderColorClass = isScrolled || !useDarkText ? "border-white" : "border-black";
+    const logoLineClass = isScrolled || !useDarkText ? "bg-white/30" : "bg-black/30";
 
     return (
         <motion.nav
@@ -34,13 +43,13 @@ const Navbar = ({ darkMode = false }) => {
                         style={{ opacity: logoOpacity }}
                         className="flex items-center gap-3"
                     >
-                        <span className="text-3xl md:text-4xl font-light tracking-[0.3em] text-white font-serif">
+                        <span className={`text-3xl md:text-4xl font-light tracking-[0.3em] font-serif transition-colors duration-500 ${textColorClass}`}>
                             MCT
                         </span>
                         <motion.div
                             initial={{ scaleX: 0 }}
                             animate={{ scaleX: isScrolled ? 1 : 0 }}
-                            className="h-px w-12 bg-white/30 origin-left"
+                            className={`h-px w-12 origin-left ${logoLineClass}`}
                         />
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
@@ -58,46 +67,53 @@ const Navbar = ({ darkMode = false }) => {
 
                 {/* Desktop Menu - Luxury Spacing */}
                 <div className="hidden md:flex items-center gap-12">
-                    <Link
-                        to="/"
-                        className="group relative text-white text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em]"
-                    >
-                        Home
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
-                    </Link>
+                    {!isHomePage && (
+                        <Link
+                            to="/"
+                            className={`group relative text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em] ${textColorClass}`}
+                        >
+                            Home
+                            <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
+                        </Link>
+                    )}
 
                     <a
-                        href="#features"
-                        className="group relative text-white text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em]"
+                        href="/#features"
+                        className={`group relative text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em] ${textColorClass}`}
                     >
                         Learn More
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
+                        <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
                     </a>
-                    <Link
-                        to="/contact"
-                        className="group relative text-white text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em]"
-                    >
-                        Contact
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
-                    </Link>
+
+                    {!isContactPage && (
+                        <Link
+                            to="/contact"
+                            className={`group relative text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em] ${textColorClass}`}
+                        >
+                            Contact
+                            <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
+                        </Link>
+                    )}
                 </div>
 
                 {/* CTA Button - Luxury */}
                 <div className="hidden md:block">
-                    <Link
-                        to="/shop"
-                        className="group relative px-8 py-3 border border-white overflow-hidden"
-                    >
-                        <span className="relative z-10 text-white text-xs font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-black">
-                            Shop Now
-                        </span>
-                        <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                    </Link>
+                    {!isShopPage && (
+                        <Link
+                            to="/shop"
+                            className={`group relative px-8 py-3 border overflow-hidden ${borderColorClass}`}
+                        >
+                            <span className={`relative z-10 text-xs font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-black ${textColorClass}`}>
+                                Shop Now
+                            </span>
+                            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        </Link>
+                    )}
                 </div>
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-white"
+                    className={`md:hidden ${textColorClass}`}
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -114,38 +130,45 @@ const Navbar = ({ darkMode = false }) => {
                         className="md:hidden bg-black/95 backdrop-blur-xl overflow-hidden border-t border-white/5"
                     >
                         <div className="flex flex-col items-center py-12 space-y-8">
-                            <Link
-                                to="/"
-                                className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                Home
-                            </Link>
+                            {!isHomePage && (
+                                <Link
+                                    to="/"
+                                    className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    Home
+                                </Link>
+                            )}
 
                             <a
-                                href="#features"
+                                href="/#features"
                                 className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Learn More
                             </a>
-                            <Link
-                                to="/contact"
-                                className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                Contact
-                            </Link>
 
-                            <div className="pt-4">
+                            {!isContactPage && (
                                 <Link
                                     to="/contact"
-                                    className="block px-12 py-3 border border-white text-white text-sm font-medium tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+                                    className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Shop Now
+                                    Contact
                                 </Link>
-                            </div>
+                            )}
+
+                            {!isShopPage && (
+                                <div className="pt-4">
+                                    <Link
+                                        to="/shop"
+                                        className="block px-12 py-3 border border-white text-white text-sm font-medium tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Shop Now
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}
