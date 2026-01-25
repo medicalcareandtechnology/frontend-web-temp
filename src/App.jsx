@@ -11,6 +11,8 @@ import ChatbotButton from './components/ChatbotButton';
 
 
 import Shop from './pages/Shop';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
@@ -25,6 +27,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
       {/* Chatbot components - available on all pages */}
