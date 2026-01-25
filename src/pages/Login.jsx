@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -19,6 +20,11 @@ const Login = () => {
 
     return (
         <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+            <SEO
+                title="Login"
+                description="Securely log in to your MCT account to manage your Ease Band settings and orders."
+                url="/login"
+            />
             <Navbar />
 
             <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
@@ -56,7 +62,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit} className="space-y-8">
                         <div className="space-y-6">
                             <div className="group">
-                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-500 mb-2 group-focus-within:text-white transition-colors">
+                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 mb-2 group-focus-within:text-white transition-colors">
                                     Email Address
                                 </label>
                                 <input
@@ -71,7 +77,7 @@ const Login = () => {
 
                             <div className="group">
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-500 group-focus-within:text-white transition-colors">
+                                    <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 group-focus-within:text-white transition-colors">
                                         Password
                                     </label>
                                 </div>
@@ -114,7 +120,7 @@ const Login = () => {
                                 <span className="w-full border-t border-white/10"></span>
                             </div>
                             <div className="relative flex justify-center text-xs">
-                                <span className="bg-[#0a0a0a] px-2 text-gray-500 tracking-widest uppercase text-[10px]">Or continue with</span>
+                                <span className="bg-[#0a0a0a] px-2 text-gray-400 tracking-widest uppercase text-[10px]">Or continue with</span>
                             </div>
                         </div>
 
@@ -137,7 +143,7 @@ const Login = () => {
                         </button>
 
                         <div className="text-center mt-12">
-                            <p className="text-[10px] tracking-[0.2em] text-gray-500 uppercase">
+                            <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase">
                                 New to MCT? {' '}
                                 <Link to="/register" className="text-white border-b border-white/30 hover:border-white pb-0.5 transition-all">
                                     Create Account

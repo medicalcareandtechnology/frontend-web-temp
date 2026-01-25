@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 const TeamSection = ({ title, members, delay = 0 }) => (
     <motion.div
@@ -44,7 +45,7 @@ const TeamSection = ({ title, members, delay = 0 }) => (
                         {member.name}
                     </h4>
                     {member.role && (
-                        <p className="text-xs text-gray-500 tracking-[0.2em] uppercase mt-1">
+                        <p className="text-xs text-gray-400 tracking-[0.2em] uppercase mt-1">
                             {member.role}
                         </p>
                     )}
@@ -75,6 +76,11 @@ const AboutTeam = () => {
 
     return (
         <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+            <SEO
+                title="Our Team"
+                description="Meet the technical, R&D, and IT experts behind MCT Ease Band."
+                url="/team"
+            />
             <Navbar />
 
             <div className="pt-32 pb-20 px-6 md:px-12 relative overflow-hidden">

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Check, ShieldCheck, Truck, RotateCcw, ArrowRight, X } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 // Icons for Trust Section
 const CODIcon = () => (
@@ -35,6 +36,12 @@ const Shop = () => {
 
     return (
         <div className="bg-white min-h-screen text-gray-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+            <SEO
+                title="Shop Ease Band | Wearable Heating Pad"
+                description="Buy the Ease Band online. Intelligent heating and vibration therapy for menstrual cramps. secure checkout, free shipping in India."
+                keywords="buy ease band, Ease Band price, heating pad for periods, menstrual relief device shop"
+                url="/shop"
+            />
             <Navbar useDarkText={true} />
 
             {/* 1. ABOVE THE FOLD */}

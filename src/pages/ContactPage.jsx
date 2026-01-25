@@ -4,6 +4,8 @@ import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone 
 import { Link } from 'react-router-dom';
 import { submitContactForm } from '../services/api';
 import axios from 'axios'
+import SEO from '../components/SEO';
+
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -28,7 +30,7 @@ const ContactPage = () => {
         setErrorMessage('');
 
         try {
-            const response = await axios.post("https://backend-web-tempp.vercel.app/contact",formData);
+            const response = await axios.post("https://backend-web-tempp.vercel.app/contact", formData);
 
             if (response.data.success) {
                 setStatus('success');
@@ -52,6 +54,11 @@ const ContactPage = () => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans relative overflow-hidden">
+            <SEO
+                title="Contact Us"
+                description="Get in touch with the MCT team for support, inquiries, or feedback."
+                url="/contact"
+            />
             {/* Subtle Gradient Background instead of Grid */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-blue-900/10 to-transparent" />
 

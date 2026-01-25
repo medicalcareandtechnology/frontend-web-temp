@@ -109,7 +109,7 @@ const ComingSoon = () => {
                         >
                             <Link
                                 to="/"
-                                className="inline-block text-gray-500 text-sm font-medium tracking-[0.2em] uppercase hover:text-white transition-colors duration-300"
+                                className="inline-block text-gray-400 text-sm font-medium tracking-[0.2em] uppercase hover:text-white transition-colors duration-300"
                             >
                                 Back to Home
                             </Link>

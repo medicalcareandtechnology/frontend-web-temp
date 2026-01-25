@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -20,6 +21,11 @@ const Register = () => {
 
     return (
         <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+            <SEO
+                title="Create Account"
+                description="Join MCT to access premium menstrual relief products. Create your account today."
+                url="/register"
+            />
             <Navbar />
 
             <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-20">
@@ -57,7 +63,7 @@ const Register = () => {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-5">
                             <div className="group">
-                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-500 mb-2 group-focus-within:text-white transition-colors">
+                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 mb-2 group-focus-within:text-white transition-colors">
                                     Full Name
                                 </label>
                                 <input
@@ -71,7 +77,7 @@ const Register = () => {
                             </div>
 
                             <div className="group">
-                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-500 mb-2 group-focus-within:text-white transition-colors">
+                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 mb-2 group-focus-within:text-white transition-colors">
                                     Email Address
                                 </label>
                                 <input
@@ -85,7 +91,7 @@ const Register = () => {
                             </div>
 
                             <div className="group">
-                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-500 mb-2 group-focus-within:text-white transition-colors">
+                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 mb-2 group-focus-within:text-white transition-colors">
                                     Password
                                 </label>
                                 <input
@@ -117,7 +123,7 @@ const Register = () => {
                                 <span className="w-full border-t border-white/10"></span>
                             </div>
                             <div className="relative flex justify-center text-xs">
-                                <span className="bg-[#0a0a0a] px-2 text-gray-500 tracking-widest uppercase text-[10px]">Or continue with</span>
+                                <span className="bg-[#0a0a0a] px-2 text-gray-400 tracking-widest uppercase text-[10px]">Or continue with</span>
                             </div>
                         </div>
 
@@ -140,7 +146,7 @@ const Register = () => {
                         </button>
 
                         <div className="text-center mt-8">
-                            <p className="text-[10px] tracking-[0.2em] text-gray-500 uppercase">
+                            <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase">
                                 Already have an account? {' '}
                                 <Link to="/login" className="text-white border-b border-white/30 hover:border-white pb-0.5 transition-all">
                                     Sign In
