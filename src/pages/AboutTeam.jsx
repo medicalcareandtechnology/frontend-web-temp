@@ -30,12 +30,19 @@ const TeamSection = ({ title, members, delay = 0 }) => (
                     className="group"
                 >
                     <div className="relative aspect-square mb-6 overflow-hidden bg-white/5 border border-white/10 rounded-sm">
-                        {/* Placeholder for Image - Using Initials */}
-                        <div className="absolute inset-0 flex items-center justify-center text-white/20 group-hover:text-amber-400/50 transition-colors duration-500">
-                            <span className="text-4xl font-serif tracking-widest opacity-30">
-                                {member.name.split(' ').map(n => n[0]).join('')}
-                            </span>
-                        </div>
+                        {member.image ? (
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className="w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                            />
+                        ) : (
+                            <div className="absolute inset-0 flex items-center justify-center text-white/20 group-hover:text-amber-400/50 transition-colors duration-500">
+                                <span className="text-4xl font-serif tracking-widest opacity-30">
+                                    {member.name.split(' ').map(n => n[0]).join('')}
+                                </span>
+                            </div>
+                        )}
 
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -44,11 +51,7 @@ const TeamSection = ({ title, members, delay = 0 }) => (
                     <h4 className="text-lg font-light tracking-[0.1em] text-white group-hover:text-blue-400 transition-colors duration-300">
                         {member.name}
                     </h4>
-                    {member.role && (
-                        <p className="text-xs text-gray-400 tracking-[0.2em] uppercase mt-1">
-                            {member.role}
-                        </p>
-                    )}
+                    {/* Role display removed */}
                 </motion.div>
             ))}
         </div>
@@ -57,21 +60,37 @@ const TeamSection = ({ title, members, delay = 0 }) => (
 
 const AboutTeam = () => {
     const technicalTeam = [
-        { name: "Rohit Kumar", role: "Technical Lead" },
-        { name: "Sudhanshu", role: "Developer" }
+        {
+            name: "Rohit Kumar",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1767106111/Rohit_pnspxe.jpg"
+        },
+        { name: "Sudhanshu" }
     ];
 
     const rdTeam = [
-        { name: "Ritika", role: "Researcher" },
-        { name: "Prapti", role: "Researcher" },
-        { name: "Deva", role: "Developer" },
-        { name: "Sneha", role: "Analyst" }
+        {
+            name: "Ritika",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410734/Ritika_zoomed_fmyjdb.jpg"
+        },
+        {
+            name: "Prapti",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410653/Prapti_vjdop6.jpg"
+        },
+        {
+            name: "Deva",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410658/Deva_pic_full_rv77ig.jpg"
+        },
+        { name: "Sneha" }
     ];
 
     const itTeam = [
-        { name: "Subham", role: "Systems Admin" },
-        { name: "Manvendra", role: "Network Engineer" },
-        { name: "Priya", role: "Support Specialist" }
+        { name: "Subham",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769411606/sonu_zoomed_eptgjs.jpg"
+        },
+        {
+            name: "Manvendra",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410669/Manvendra_vqdps2.jpg"
+        }
     ];
 
     return (
