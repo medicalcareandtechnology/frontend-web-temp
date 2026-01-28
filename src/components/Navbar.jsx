@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = ({ useDarkText = false }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { scrollY } = useScroll();
     const location = useLocation();
     const isHomePage = location.pathname === '/';
     const isShopPage = location.pathname === '/shop';
     const isContactPage = location.pathname === '/contact';
+    const isTeamPage = location.pathname === '/team';
+    const isComingSoonPage = location.pathname === '/coming-soon';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,14 +21,9 @@ const Navbar = ({ useDarkText = false }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Logo transforms based on scroll
-    const logoScale = useTransform(scrollY, [0, 100], [1, 0.85]);
-    const logoOpacity = useTransform(scrollY, [0, 50], [0, 1]);
-
     // Dynamic classes based on scroll and theme
     const textColorClass = isScrolled || !useDarkText ? "text-white" : "text-black";
     const borderColorClass = isScrolled || !useDarkText ? "border-white" : "border-black";
-    const logoLineClass = isScrolled || !useDarkText ? "bg-white/30" : "bg-black/30";
 
     return (
         <motion.nav
@@ -37,32 +33,13 @@ const Navbar = ({ useDarkText = false }) => {
                 }`}
         >
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-                {/* Animated Logo - Grows from hero */}
+                {/* Animated Logo */}
                 <Link to="/" className="relative overflow-hidden">
-                    <motion.div
-                        style={{ opacity: logoOpacity }}
-                        className="flex items-center gap-3"
-                    >
-                        <span className={`text-3xl md:text-4xl font-light tracking-[0.3em] font-serif transition-colors duration-500 ${textColorClass}`}>
-                            MCT
-                        </span>
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: isScrolled ? 1 : 0 }}
-                            className={`h-px w-12 origin-left ${logoLineClass}`}
-                        />
-                        <motion.span
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{
-                                opacity: isScrolled ? 1 : 0,
-                                x: isScrolled ? 0 : -20
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className="text-sm font-light tracking-[0.2em] text-gray-400 uppercase"
-                        >
-                            Ease Band
-                        </motion.span>
-                    </motion.div>
+                    <img
+                        src="https://res.cloudinary.com/dkganhypn/image/upload/v1769610206/logo_long-removebg_ssuij7.png"
+                        alt="MCT Logo"
+                        className={`transition-all duration-300 w-auto ${isScrolled ? 'h-10' : 'h-14 md:h-16'}`}
+                    />
                 </Link>
 
                 {/* Desktop Menu - Luxury Spacing */}
@@ -85,6 +62,16 @@ const Navbar = ({ useDarkText = false }) => {
                         <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
                     </a>
 
+                    {!isTeamPage && (
+                        <Link
+                            to="/team"
+                            className={`group relative text-sm font-light tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.25em] ${textColorClass}`}
+                        >
+                            Team
+                            <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
+                        </Link>
+                    )}
+
                     {!isContactPage && (
                         <Link
                             to="/contact"
@@ -98,9 +85,9 @@ const Navbar = ({ useDarkText = false }) => {
 
                 {/* CTA Button - Luxury */}
                 <div className="hidden md:block">
-                    {!isShopPage && (
+                    {!isComingSoonPage && (
                         <Link
-                            to="/shop"
+                            to="/coming-soon"
                             className={`group relative px-8 py-3 border overflow-hidden ${borderColorClass}`}
                         >
                             <span className={`relative z-10 text-xs font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-black ${textColorClass}`}>
@@ -148,6 +135,16 @@ const Navbar = ({ useDarkText = false }) => {
                                 Learn More
                             </a>
 
+                            {!isTeamPage && (
+                                <Link
+                                    to="/team"
+                                    className="text-white text-lg font-light tracking-[0.2em] uppercase hover:text-gray-400 transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    Team
+                                </Link>
+                            )}
+
                             {!isContactPage && (
                                 <Link
                                     to="/contact"
@@ -158,10 +155,10 @@ const Navbar = ({ useDarkText = false }) => {
                                 </Link>
                             )}
 
-                            {!isShopPage && (
+                            {!isComingSoonPage && (
                                 <div className="pt-4">
                                     <Link
-                                        to="/shop"
+                                        to="/coming-soon"
                                         className="block px-12 py-3 border border-white text-white text-sm font-medium tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >

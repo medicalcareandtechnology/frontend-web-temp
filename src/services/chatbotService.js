@@ -16,7 +16,7 @@ try {
 
 // Contact information for fallback
 const CONTACT_INFO = {
-  email: 'rohitks1124@gmail.com',
+  email: 'mct.medtech@gmail.com',
   phone: '8699715686',
   name: 'MCT Support Team'
 };

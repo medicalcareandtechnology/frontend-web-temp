@@ -219,10 +219,10 @@ const Shop = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* 4. SECTION C: HOW IT WORKS */}
-            <section className="py-20 bg-black text-white">
+            < section className="py-20 bg-black text-white" >
                 <div className="container mx-auto px-6 max-w-5xl text-center">
                     <h2 className="text-3xl md:text-5xl font-serif mb-16">Simple as 1, 2, 3.</h2>
 

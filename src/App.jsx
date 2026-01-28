@@ -31,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/team" element={<AboutTeam />} />
+        <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
 
       {/* Chatbot components - available on all pages */}

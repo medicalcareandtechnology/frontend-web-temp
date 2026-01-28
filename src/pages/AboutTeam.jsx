@@ -64,7 +64,10 @@ const AboutTeam = () => {
             name: "Rohit Kumar",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1767106111/Rohit_pnspxe.jpg"
         },
-        { name: "Sudhanshu" }
+        {
+            name: "Sudhanshu",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769606159/Sudhanshu_dukxgi.jpg"
+        }
     ];
 
     const rdTeam = [
@@ -80,11 +83,15 @@ const AboutTeam = () => {
             name: "Deva",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410658/Deva_pic_full_rv77ig.jpg"
         },
-        { name: "Sneha" }
+        {
+            name: "Sneha",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769606160/Sneha_lxtyyd.jpg"
+        }
     ];
 
     const itTeam = [
-        { name: "Subham",
+        {
+            name: "Subham",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769411606/sonu_zoomed_eptgjs.jpg"
         },
         {
