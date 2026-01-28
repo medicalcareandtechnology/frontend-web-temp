@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -44,6 +44,16 @@ const Footer = () => {
                                     Learn More
                                 </a>
                             </li>
+                            <li>
+                                <Link to="/coming-soon" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
+                                    Shop
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/team" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
+                                    Team
+                                </Link>
+                            </li>
 
                             <li>
                                 <Link to="/contact" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
@@ -59,8 +69,8 @@ const Footer = () => {
                         <ul className="space-y-4">
                             <li className="flex items-center gap-3 text-gray-400 group">
                                 <Mail className="w-4 h-4 text-blue-500 shrink-0" />
-                                <a href="mailto:rohitks1124@gmail.com" className="hover:text-blue-400 transition-colors text-sm font-light">
-                                    rohitks1124@gmail.com
+                                <a href="mailto:mct.medtech@gmail.com" className="hover:text-blue-400 transition-colors text-sm font-light">
+                                    mct.medtech@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-center gap-3 text-gray-400 group">
@@ -70,6 +80,26 @@ const Footer = () => {
                                 </a>
                             </li>
                         </ul>
+
+                        {/* Social Icons */}
+                        <div className="flex gap-4 mt-8">
+                            <a
+                                href="https://www.instagram.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-500/20 hover:text-blue-400 transition-all duration-300"
+                            >
+                                <Instagram className="w-5 h-5" />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-500/20 hover:text-blue-400 transition-all duration-300"
+                            >
+                                <Linkedin className="w-5 h-5" />
+                            </a>
+                        </div>
                     </div>
                 </div>
 
