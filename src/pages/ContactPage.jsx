@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone, MapPin, Instagram, Linkedin, Twitter, Mail } from 'lucide-react';
 
 import { Link } from 'react-router-dom';
 import { submitContactForm } from '../services/api';
@@ -32,25 +32,41 @@ const ContactPage = () => {
         setStatus('submitting');
         setErrorMessage('');
 
+        // Google Apps Script Web App URL from .env
+        const GOOGLE_SCRIPT_URL = import.meta.env.VITE_MCT_CONTACT;
+
+        if (!GOOGLE_SCRIPT_URL) {
+            setStatus('error');
+            setErrorMessage('Configuration Error: Google Script URL not set in .env.');
+            console.error("Missing VITE_MCT_CONTACT in .env file");
+            return;
+        }
+
         try {
-            const response = await axios.post("https://backend-web-tempp.vercel.app/contact", formData);
+            // Using fetch with no-cors mode to send data to Google Apps Script
+            // Note: In no-cors mode, we cannot read the response status (it will always be opaque)
+            // We assume success if the fetch completes without throwing a network error.
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-            if (response.data.success) {
-                setStatus('success');
-                setFormData({ name: '', email: '', phone: '', message: '' });
+            // Since we can't check response.ok in no-cors, we assume success if we reach here.
+            setStatus('success');
+            setFormData({ name: '', email: '', phone: '', message: '' });
 
-                // Reset success message after 5 seconds
-                setTimeout(() => {
-                    setStatus('idle');
-                }, 5000);
-            } else {
-                setStatus('error');
-                setErrorMessage(response.data.message || 'Something went wrong. Please try again.');
-            }
+            setTimeout(() => {
+                setStatus('idle');
+            }, 5000);
+
         } catch (error) {
             console.error('Error submitting form:', error);
             setStatus('error');
-            setErrorMessage(error.message || 'Unable to submit form. Please try again later.');
+            setErrorMessage('Unable to submit form. Please check your connection and try again.');
         }
     };
 
@@ -82,25 +98,84 @@ const ContactPage = () => {
                 </motion.div>
 
                 {/* Contact Options Grid */}
+                {/* Contact Options Grid */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
-                    className="flex justify-center max-w-5xl w-full mb-24 text-center"
+                    className="w-full max-w-6xl mb-24"
                 >
-                    {/* Phone Section */}
-                    <div className="flex flex-col items-center">
-                        <h2 className="text-sm font-bold tracking-[0.2em] uppercase mb-6">Phone</h2>
-                        <p className="text-gray-600 text-sm mb-2 font-light">
-                            Monday - Saturday from 10 AM to 10 PM (EST).
-                        </p>
-                        <p className="text-gray-600 text-sm mb-6 font-light">
-                            Sunday from 10 AM to 9 PM (EST).
-                        </p>
-                        <a href="tel:+918699715686" className="inline-flex items-center text-sm font-medium border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors uppercase tracking-wider">
-                            <Phone className="w-4 h-4 mr-2" />
-                            Call Us +91 86997 15686
-                        </a>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+                        {/* Phone Section */}
+                        <div className="flex flex-col items-center text-center">
+                            <h2 className="text-sm font-bold tracking-[0.2em] uppercase mb-6 text-gray-400">Phone</h2>
+                            <p className="text-gray-500 text-sm mb-2 font-light">
+                                Monday - Saturday<br />10 AM - 10 PM (IST)
+                            </p>
+                            <p className="text-gray-500 text-sm mb-6 font-light">
+                                Sunday<br />10 AM - 9 PM (IST)
+                            </p>
+                            <a href="tel:+918699715686" className="inline-flex items-center text-sm font-medium border-b border-gray-200 pb-1 hover:border-black transition-colors uppercase tracking-wider">
+                                <Phone className="w-4 h-4 mr-2" />
+                                +91 86997 15686
+                            </a>
+                        </div>
+
+                        {/* Email Section */}
+                        <div className="flex flex-col items-center text-center">
+                            <h2 className="text-sm font-bold tracking-[0.2em] uppercase mb-6 text-gray-400">Email</h2>
+                            <p className="text-gray-500 text-sm mb-8 font-light max-w-xs">
+                                For general inquiries, support, and partnership opportunities.
+                            </p>
+                            <a href="mailto:mct.medtech@gmail.com" className="inline-flex items-center text-sm font-medium border-b border-gray-200 pb-1 hover:border-black transition-colors uppercase tracking-wider">
+                                <Mail className="w-4 h-4 mr-2" />
+                                mct.medtech@gmail.com
+                            </a>
+                        </div>
+
+                        {/* Social Icons Section */}
+                        <div className="flex flex-col items-center text-center">
+                            <h2 className="text-sm font-bold tracking-[0.2em] uppercase mb-6 text-gray-400">Follow Us</h2>
+                            <p className="text-gray-500 text-sm mb-8 font-light">
+                                Stay connected for updates.
+                            </p>
+                            <div className="flex gap-6">
+                                <a
+                                    href="https://www.instagram.com/medicalcaretechnology/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-black transition-colors duration-300"
+                                >
+                                    <svg
+                                        className="w-6 h-6"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </a>
+                                <a
+                                    href="https://www.linkedin.com/company/mct-medcaretech/about/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-black transition-colors duration-300"
+                                >
+                                    <svg
+                                        className="w-6 h-6"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                    >
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
 
@@ -200,23 +275,25 @@ const ContactPage = () => {
                         <div className="min-h-[3rem]">
                             {status === 'success' && (
                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="flex items-center justify-center space-x-2 text-green-700 text-sm tracking-wide bg-green-50 py-3"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="flex items-center justify-center space-x-3 text-black text-xs font-light tracking-[0.2em] uppercase border-t border-b border-gray-200 py-4"
                                 >
-                                    <CheckCircle className="w-4 h-4" />
-                                    <span>MESSAGE SENT SUCCESSFULLY</span>
+                                    <CheckCircle className="w-4 h-4 text-gray-600" />
+                                    <span>Message sent successfully</span>
                                 </motion.div>
                             )}
 
                             {status === 'error' && (
                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="flex items-center justify-center space-x-2 text-red-700 text-sm tracking-wide bg-red-50 py-3"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="flex items-center justify-center space-x-3 text-black text-xs font-light tracking-[0.2em] uppercase border-t border-b border-gray-200 py-4"
                                 >
-                                    <AlertCircle className="w-4 h-4" />
-                                    <span>{errorMessage.toUpperCase() || 'ERROR SENDING MESSAGE'}</span>
+                                    <AlertCircle className="w-4 h-4 text-gray-600" />
+                                    <span>{errorMessage || 'Error sending message'}</span>
                                 </motion.div>
                             )}
                         </div>

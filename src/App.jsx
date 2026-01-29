@@ -7,6 +7,7 @@ import ContactPage from './pages/ContactPage';
 import ComingSoon from './pages/ComingSoon';
 import Chatbot from './components/Chatbot';
 import ChatbotButton from './components/ChatbotButton';
+import ScrollToTop from './components/ScrollToTop';
 
 
 
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />

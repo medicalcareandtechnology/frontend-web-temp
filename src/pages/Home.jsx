@@ -9,6 +9,8 @@ import LifestyleUsage from '../components/LifestyleUsage';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
+import Vision from '../components/Vision';
+
 function Home() {
     return (
         <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-black selection:text-white">
@@ -24,7 +26,7 @@ function Home() {
             <ShowcaseLifestyle />
             <ShowcaseTech />
             <LifestyleUsage />
-
+            <Vision />
             <Footer />
         </div>
     );
