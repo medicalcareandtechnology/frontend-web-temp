@@ -4,6 +4,8 @@ import { Star, Check, ShieldCheck, Truck, RotateCcw, ArrowRight, X } from 'lucid
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import useRazorpay from '../hooks/useRazorpay';
+import { createOrder, verifyPayment } from '../services/paymentService'; // Assumption: createOrder returns order details
 
 // Icons for Trust Section
 const CODIcon = () => (
@@ -19,6 +21,9 @@ const Shop = () => {
     const [activeImage, setActiveImage] = useState(0);
     const [isZoomed, setIsZoomed] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isProcessing, setIsProcessing] = useState(false);
+
+    const { displayRazorpay } = useRazorpay();
 
     const images = [
         "https://res.cloudinary.com/dkganhypn/image/upload/v1766934940/pic2_vjwyyy.jpg", // Main View
@@ -32,6 +37,44 @@ const Shop = () => {
         const x = ((e.clientX - left) / width) * 100;
         const y = ((e.clientY - top) / height) * 100;
         setMousePosition({ x, y });
+    };
+
+    const handleBuyNow = async () => {
+        setIsProcessing(true);
+        try {
+            // 1. Create Order on Backend
+            const orderData = await createOrder(1999); // Amount in INR
+
+            // 2. Open Razorpay Checkout
+            await displayRazorpay(
+                orderData,
+                async (paymentData) => {
+                    // 3. On Success, Verify Payment
+                    try {
+                        const verificationResult = await verifyPayment(paymentData);
+                        if (verificationResult.success) {
+                            alert("Payment Successful! Your Ease Band is on its way.");
+                            // Optional: Redirect to success page
+                        } else {
+                            alert("Payment verification failed. Please contact support.");
+                        }
+                    } catch (verifyError) {
+                        console.error("Verification Error", verifyError);
+                        alert("Payment Successful but verification failed. Please contact support.");
+                    }
+                },
+                (error) => {
+                    console.error("Payment Failed", error);
+                    alert(`Payment Failed: ${error.description}`);
+                }
+            );
+
+        } catch (error) {
+            console.error("Transaction Error", error);
+            alert("Could not initiate transaction. Please try again later.");
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     return (
@@ -52,7 +95,7 @@ const Shop = () => {
                         {/* Left: Product Visuals (Gallery + Zoom) */}
                         <div className="lg:w-1/2">
                             <div
-                                className="relative aspect-[4/5] bg-gray-50 rounded-2xl overflow-hidden cursor-crosshair mb-6 border border-gray-100 shadow-sm"
+                                className="relative aspect-[4/5] bg-gray-50 rounded-2xl overflow-hidden cursor-crosshair mb-6"
                                 onMouseEnter={() => setIsZoomed(true)}
                                 onMouseLeave={() => setIsZoomed(false)}
                                 onMouseMove={handleMouseMove}
@@ -75,7 +118,7 @@ const Shop = () => {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveImage(idx)}
-                                        className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${activeImage === idx ? 'border-blue-600 ring-2 ring-blue-100' : 'border-gray-200 hover:border-gray-300'}`}
+                                        className={`w-20 h-20 rounded-lg overflow-hidden transition-all flex-shrink-0 ${activeImage === idx ? 'ring-2 ring-blue-100' : 'hover:opacity-80'}`}
                                     >
                                         <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
                                     </button>
@@ -102,7 +145,7 @@ const Shop = () => {
                             </p>
 
                             {/* Price Block */}
-                            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 mb-8 max-w-md">
+                            <div className="bg-gray-50 p-6 rounded-xl mb-8 max-w-md">
                                 <div className="flex items-baseline gap-3 mb-2">
                                     <span className="text-4xl font-bold text-gray-900">₹1,999</span>
                                     <span className="text-lg text-gray-400 line-through">₹4,999</span>
@@ -111,14 +154,25 @@ const Shop = () => {
                                 <p className="text-xs text-gray-500 mb-4">Inclusive of all taxes. Free shipping across India.</p>
 
                                 {/* Trust Badges - Mini */}
-                                <div className="flex gap-4 text-xs text-gray-600 font-medium py-3 border-t border-gray-200">
+                                <div className="flex gap-4 text-xs text-gray-600 font-medium py-3">
                                     <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-blue-600" /> 1 Year Warranty</div>
                                     <div className="flex items-center gap-1.5"><Truck size={14} className="text-blue-600" /> Free Delivery</div>
                                 </div>
 
                                 {/* Primary CTA */}
-                                <button className="w-full bg-black text-white h-14 rounded-lg font-bold text-lg hover:bg-gray-800 transition-all transform active:scale-[0.98] shadow-lg shadow-gray-200">
-                                    BUY NOW
+                                <button
+                                    onClick={handleBuyNow}
+                                    disabled={isProcessing}
+                                    className="w-full bg-black text-white h-14 rounded-lg font-bold text-lg hover:bg-gray-800 transition-all transform active:scale-[0.98] shadow-lg shadow-gray-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                >
+                                    {isProcessing ? (
+                                        <>
+                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                            PROCESSING...
+                                        </>
+                                    ) : (
+                                        "BUY NOW"
+                                    )}
                                 </button>
                                 <p className="text-center text-[10px] text-gray-400 mt-3 font-medium uppercase tracking-wider">
                                     Safe & Secure Checkout via Razorpay
@@ -132,7 +186,7 @@ const Shop = () => {
                                     { icon: RotateCcw, label: "7 Day Replacement" },
                                     { icon: Check, label: "100% Original Product" }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex flex-col items-center text-center gap-2 p-3 bg-white border border-gray-100 rounded-xl hover:border-gray-200 transition-colors">
+                                    <div key={i} className="flex flex-col items-center text-center gap-2 p-3 bg-white rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="p-2 bg-gray-50 rounded-full text-gray-900">
                                             <item.icon size={18} />
                                         </div>
@@ -164,7 +218,7 @@ const Shop = () => {
 
                         <div className="md:w-1/2 relative">
                             <div className="absolute inset-0 bg-blue-100 rounded-full blur-[60px] opacity-40 mix-blend-multiply"></div>
-                            <div className="relative bg-white p-8 rounded-3xl shadow-sm border border-gray-100/50">
+                            <div className="relative bg-white p-8 rounded-3xl">
                                 <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Designed For</h3>
                                 <ul className="space-y-4">
                                     {[
@@ -179,7 +233,7 @@ const Shop = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="mt-8 pt-6 border-t border-gray-100 text-[10px] text-gray-400 leading-relaxed italic">
+                                <div className="mt-8 pt-6 text-[10px] text-gray-400 leading-relaxed italic">
                                     Note: Ease Band provides symptom relief for menstrual cramps. It is not a medical treatment for conditions like Endometriosis.
                                 </div>
                             </div>
@@ -227,8 +281,7 @@ const Shop = () => {
                     <h2 className="text-3xl md:text-5xl font-serif mb-16">Simple as 1, 2, 3.</h2>
 
                     <div className="grid md:grid-cols-3 gap-12 relative">
-                        {/* Connecting Line (Desktop) */}
-                        <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-white/20 -z-0" />
+                        {/* Connecting Line removed */}
 
                         {[
                             { step: "01", title: "Strap It On", desc: "Adjust the flexible band for a snug fit around your waist." },
@@ -236,7 +289,7 @@ const Shop = () => {
                             { step: "03", title: "Live Free", desc: "Go about your day while the warmth melts the tension away." }
                         ].map((s, i) => (
                             <div key={i} className="relative z-10 flex flex-col items-center">
-                                <div className="w-24 h-24 bg-gray-900 border border-gray-700 rounded-full flex items-center justify-center text-3xl font-serif italic mb-6 shadow-2xl shadow-blue-900/20">
+                                <div className="w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center text-3xl font-serif italic mb-6 shadow-2xl shadow-blue-900/20">
                                     {s.step}
                                 </div>
                                 <h3 className="text-xl font-medium mb-3">{s.title}</h3>
@@ -266,7 +319,7 @@ const Shop = () => {
                         </div>
                     </div>
 
-                    <div className="border-t border-gray-200 pt-12">
+                    <div className="pt-12">
                         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Secured & Powered By</p>
                         <div className="flex justify-center gap-8 opacity-50 grayscale">
                             {/* Replaced with text placeholders for reliability if SVGs missing */}
@@ -290,7 +343,7 @@ const Shop = () => {
                             "A quiet revolution <br /> <span className="text-white not-italic">for your comfort."</span>
                         </h2>
 
-                        <div className="w-px h-16 bg-gradient-to-b from-transparent via-white/20 to-transparent mx-auto" />
+                        {/* Divider removed */}
 
                         <p className="text-lg text-gray-400 font-light tracking-wide max-w-xl mx-auto">
                             Join the thousands of women who have already chosen freedom over pain.
