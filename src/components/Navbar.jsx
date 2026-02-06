@@ -85,9 +85,9 @@ const Navbar = ({ useDarkText = false }) => {
 
                 {/* CTA Button - Luxury */}
                 <div className="hidden md:block">
-                    {!isComingSoonPage && (
+                    {!isShopPage && (
                         <Link
-                            to="/coming-soon"
+                            to="/shop"
                             className={`group relative px-8 py-3 border overflow-hidden ${borderColorClass}`}
                         >
                             <span className={`relative z-10 text-xs font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-black ${textColorClass}`}>
@@ -114,7 +114,7 @@ const Navbar = ({ useDarkText = false }) => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-black/95 backdrop-blur-xl overflow-hidden border-t border-white/5"
+                        className="md:hidden bg-black/95 backdrop-blur-xl overflow-hidden"
                     >
                         <div className="flex flex-col items-center py-12 space-y-8">
                             {!isHomePage && (
@@ -155,10 +155,10 @@ const Navbar = ({ useDarkText = false }) => {
                                 </Link>
                             )}
 
-                            {!isComingSoonPage && (
+                            {!isShopPage && (
                                 <div className="pt-4">
                                     <Link
-                                        to="/coming-soon"
+                                        to="/shop"
                                         className="block px-12 py-3 border border-white text-white text-sm font-medium tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
