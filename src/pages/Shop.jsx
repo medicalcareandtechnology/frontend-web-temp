@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useRazorpay from '../hooks/useRazorpay';
-import { createOrder, verifyPayment } from '../services/paymentService'; // Assumption: createOrder returns order details
+import { createOrder, verifyPayment } from '../services/api';
 
 // Icons for Trust Section
 const CODIcon = () => (
@@ -200,7 +200,7 @@ const Shop = () => {
             </section>
 
             {/* 2. SECTION A: WHY THIS EXISTS (Empathic Approach) */}
-            <section className="py-24 bg-orange-50/50">
+            <section className="py-24 bg-orange-50">
                 <div className="container mx-auto px-6 max-w-5xl">
                     <div className="flex flex-col md:flex-row gap-16 items-center">
                         <div className="md:w-1/2">
@@ -301,7 +301,7 @@ const Shop = () => {
             </section>
 
             {/* 5. SECTION D: PROOF / TRUST */}
-            <section className="py-24 bg-blue-50/50">
+            <section className="py-24 bg-blue-50">
                 <div className="container mx-auto px-6 max-w-4xl text-center">
                     <div className="flex justify-center text-yellow-500 mb-6 gap-1">
                         {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="currentColor" size={24} />)}

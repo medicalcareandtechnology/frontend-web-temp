@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 
@@ -8,15 +9,20 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const { register, loading } = useAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-            console.log('Register attempt', { name, email, password });
-        }, 2000);
+        setError('');
+
+        const result = await register(name, email, password);
+        if (result.success) {
+            navigate('/');
+        } else {
+            setError(result.error || 'Failed to register');
+        }
     };
 
     return (
@@ -59,6 +65,12 @@ const Register = () => {
                             Create Account
                         </motion.p>
                     </div>
+
+                    {error && (
+                        <div className="mb-6 p-3 bg-red-900/30 border border-red-500/50 rounded text-red-200 text-xs text-center">
+                            {error}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-5">
@@ -108,11 +120,11 @@ const Register = () => {
                         <div className="pt-2">
                             <button
                                 type="submit"
-                                disabled={isLoading}
+                                disabled={loading}
                                 className="w-full group relative px-8 py-4 border border-white overflow-hidden bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <span className="relative z-10 text-xs font-medium tracking-[0.3em] uppercase transition-colors duration-500 group-hover:text-black text-white flex justify-center items-center gap-2">
-                                    {isLoading ? 'Creating Account...' : 'Create Account'}
+                                    {loading ? 'Creating Account...' : 'Create Account'}
                                 </span>
                                 <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             </button>
