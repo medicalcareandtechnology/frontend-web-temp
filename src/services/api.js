@@ -1,121 +1,152 @@
+import axios from 'axios';
+
 /**
  * API Service Layer
- * Centralized API communication for the NeoMotion frontend
+ * Centralized Axios instance for all backend communication
  */
 
-// Get API base URL from environment variables
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+// Get API base URL from environment variables, fallback for local dev
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+
+// Create a single, robust Axios instance
+const apiClient = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    // Optional: timeout after 10 seconds
+    timeout: 10000,
+});
 
 /**
- * API Service class for handling all API requests
+ * Request Interceptor
+ * Useful for attaching Auth Tokens to every request automatically
+ */
+apiClient.interceptors.request.use(
+    (config) => {
+        // Example: If handling auth tokens later
+        // const token = localStorage.getItem('auth_token');
+        // if (token) {
+        //     config.headers['Authorization'] = `Bearer ${token}`;
+        // }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+/**
+ * Response Interceptor
+ * Centralized error handling (e.g., logging out on 401 Unauthorized)
+ */
+apiClient.interceptors.response.use(
+    (response) => {
+        // Return just the data part by default for cleaner component code
+        return response.data;
+    },
+    (error) => {
+        // Global error handling
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error('API Error Response:', error.response.data);
+
+            if (error.response.status === 401) {
+                // Auto-logout user on unauthorized
+                // localStorage.removeItem('auth_token');
+                // window.location.href = '/login';
+            }
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error('API No Response:', error.request);
+            // Throw a user-friendly network error
+            return Promise.reject(new Error('Unable to connect to the server. Please check your internet connection.'));
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('API Request Setup Error:', error.message);
+        }
+
+        // Return a standardized error object or just the response data's error message
+        const errorMessage = error.response?.data?.message || 'An unexpected error occurred';
+        return Promise.reject(new Error(errorMessage));
+    }
+);
+
+/**
+ * API Service class for specific domain operations
  */
 class ApiService {
     /**
-     * Make a fetch request with error handling
-     * @param {string} endpoint - API endpoint (e.g., '/api/contact')
-     * @param {object} options - Fetch options
-     * @returns {Promise<object>} Response data
-     */
-    async request(endpoint, options = {}) {
-        const url = `${API_BASE_URL}${endpoint}`;
-
-        const defaultOptions = {
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },
-        };
-
-        const config = { ...defaultOptions, ...options };
-
-        try {
-            const response = await fetch(url, config);
-
-            // Parse JSON response
-            const data = await response.json();
-
-            // Check if response is successful
-            if (!response.ok) {
-                throw new Error(data.message || `HTTP error! status: ${response.status}`);
-            }
-
-            return data;
-        } catch (error) {
-            // Handle network errors
-            if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
-                throw new Error('Unable to connect to the server. Please check your internet connection.');
-            }
-
-            // Re-throw other errors
-            throw error;
-        }
-    }
-
-    /**
      * Submit contact form data
-     * @param {object} formData - Contact form data
-     * @param {string} formData.name - User's name
-     * @param {string} formData.email - User's email
-     * @param {string} formData.phone - User's phone number
-     * @param {string} formData.message - User's message
-     * @returns {Promise<object>} Response from server
+     * @param {object} formData 
+     * @returns {Promise<object>}
      */
     async submitContactForm(formData) {
-        return this.request('/api/contact', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-        });
+        return apiClient.post('/contact', formData);
     }
 
     /**
      * Check API health
-     * @returns {Promise<object>} Health status
+     * @returns {Promise<object>}
      */
     async checkHealth() {
-        return this.request('/api/health', {
-            method: 'GET',
-        });
+        return apiClient.get('/health');
     }
 
     /**
      * Subscribe to newsletter
-     * @param {string} email - User's email
-     * @returns {Promise<object>} Response from server
+     * @param {string} email 
+     * @returns {Promise<object>}
      */
     async subscribeToNewsletter(email) {
+        // For standard backend, this would just be:
+        // return apiClient.post('/newsletter', { email });
+
+        // Since the current implementation uses a special Google Apps Script URL
+        // we handle this uniquely without the base URL interceptors
         const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
         if (!scriptUrl) {
-            console.error('Google Script URL not configured');
-            throw new Error('Configuration error');
+            throw new Error('Newsletter configuration error');
         }
 
-        // Google Apps Script requires no-cors for simple posts usually, or specific handling
-        // but typically standard fetch works if the script returns JSON and CORS is handled there (web app set to 'Anyone').
-        // However, 'no-cors' mode might be needed if we don't care about response body reading in strict environments.
-        // Let's try standard POST. The provided script returns JSON.
+        try {
+            // Using standard fetch since this is a third-party script, 
+            // not our standard Axios backend.
+            await fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify({ email }),
+            });
+            return { success: true };
+        } catch (error) {
+            throw new Error('Failed to subscribe.');
+        }
+    }
 
-        // Note: fetch to Google Apps Script often needs 'no-cors' if CORS headers aren't perfect, 
-        // but 'no-cors' makes the response opaque.
-        // Usually, to get a result, we use a workaround or form submission.
-        // Let's use simple fetch with mode 'no-cors' if we just want to submit, but we can't check success easily.
-        // BUT, if the script is deployed as "Anyone", it usually supports CORS if returning the right headers/content type.
-        // The provided script returns `ContentService.createTextOutput...setMimeType(JSON)`. 
-        // Google Apps Script usually handles CORS redirects automatically.
+    //---------------------------------------------------------
+    // Payment specific methods (moved from paymentService.js)
+    //---------------------------------------------------------
 
-        // Debugging: Log the URL to ensure it's loaded
-        console.log('Sending to Google Script:', scriptUrl);
+    /**
+     * Create a new payment order
+     * @param {number} amount
+     * @returns {Promise<object>}
+     */
+    async createOrder(amount) {
+        return apiClient.post('/payment/create-order', { amount });
+    }
 
-        // using text/plain for the Content-Type to ensure successful transmission 
-        // with mode: 'no-cors' which prevents preflight checks and header stripping issues.
-        // The Google Apps Script will still parse the JSON string body.
-        return fetch(scriptUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
-            },
-            body: JSON.stringify({ email }),
-        });
+    /**
+     * Verify a completed Razorpay payment
+     * @param {object} paymentData 
+     * @returns {Promise<object>}
+     */
+    async verifyPayment(paymentData) {
+        return apiClient.post('/payment/verify-payment', paymentData);
     }
 }
 
@@ -123,7 +154,11 @@ class ApiService {
 const apiService = new ApiService();
 export default apiService;
 
-// Named exports for specific functions
+// Named exports for specific functions for convenience
 export const submitContactForm = (formData) => apiService.submitContactForm(formData);
 export const checkApiHealth = () => apiService.checkHealth();
 export const subscribeToNewsletter = (email) => apiService.subscribeToNewsletter(email);
+
+// Payment exports
+export const createOrder = (amount) => apiService.createOrder(amount);
+export const verifyPayment = (paymentData) => apiService.verifyPayment(paymentData);

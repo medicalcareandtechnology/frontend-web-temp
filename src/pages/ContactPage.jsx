@@ -4,7 +4,6 @@ import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone,
 
 import { Link } from 'react-router-dom';
 import { submitContactForm } from '../services/api';
-import axios from 'axios'
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -32,30 +31,9 @@ const ContactPage = () => {
         setStatus('submitting');
         setErrorMessage('');
 
-        // Google Apps Script Web App URL from .env
-        const GOOGLE_SCRIPT_URL = import.meta.env.VITE_MCT_CONTACT;
-
-        if (!GOOGLE_SCRIPT_URL) {
-            setStatus('error');
-            setErrorMessage('Configuration Error: Google Script URL not set in .env.');
-            console.error("Missing VITE_MCT_CONTACT in .env file");
-            return;
-        }
-
         try {
-            // Using fetch with no-cors mode to send data to Google Apps Script
-            // Note: In no-cors mode, we cannot read the response status (it will always be opaque)
-            // We assume success if the fetch completes without throwing a network error.
-            await fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+            await submitContactForm(formData);
 
-            // Since we can't check response.ok in no-cors, we assume success if we reach here.
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', message: '' });
 
@@ -66,7 +44,7 @@ const ContactPage = () => {
         } catch (error) {
             console.error('Error submitting form:', error);
             setStatus('error');
-            setErrorMessage('Unable to submit form. Please check your connection and try again.');
+            setErrorMessage(error.message || 'Unable to submit form. Please check your connection and try again.');
         }
     };
 
