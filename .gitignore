@@ -39,4 +39,4 @@ dist-ssr
 
 # Exclude backend and artifacts
 backend/
-API_CONTRACT.md
+
