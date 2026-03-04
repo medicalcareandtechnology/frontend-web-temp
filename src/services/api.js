@@ -24,11 +24,11 @@ const apiClient = axios.create({
  */
 apiClient.interceptors.request.use(
     (config) => {
-        // Example: If handling auth tokens later
-        // const token = localStorage.getItem('auth_token');
-        // if (token) {
-        //     config.headers['Authorization'] = `Bearer ${token}`;
-        // }
+        // Automatically attach token if available
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => {
@@ -77,6 +77,27 @@ apiClient.interceptors.response.use(
  * API Service class for specific domain operations
  */
 class ApiService {
+    /**
+     * Register a new user
+     * @param {string} name 
+     * @param {string} email 
+     * @param {string} password 
+     * @returns {Promise<object>}
+     */
+    async registerUser(name, email, password) {
+        return apiClient.post('/auth/register', { name, email, password });
+    }
+
+    /**
+     * Login existing user
+     * @param {string} email 
+     * @param {string} password 
+     * @returns {Promise<object>}
+     */
+    async loginUser(email, password) {
+        return apiClient.post('/auth/login', { email, password });
+    }
+
     /**
      * Submit contact form data
      * @param {object} formData 
@@ -155,6 +176,8 @@ const apiService = new ApiService();
 export default apiService;
 
 // Named exports for specific functions for convenience
+export const registerUser = (name, email, password) => apiService.registerUser(name, email, password);
+export const loginUser = (email, password) => apiService.loginUser(email, password);
 export const submitContactForm = (formData) => apiService.submitContactForm(formData);
 export const checkApiHealth = () => apiService.checkHealth();
 export const subscribeToNewsletter = (email) => apiService.subscribeToNewsletter(email);

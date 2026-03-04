@@ -18,6 +18,21 @@ const useRazorpay = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const displayRazorpay = async (orderData, onSuccess, onFailure) => {
+        // Mock order bypass for development
+        if (orderData && orderData.id && orderData.id.startsWith('order_mock_')) {
+            console.log('[MOCK] Bypassing Razorpay SDK for mock order:', orderData.id);
+            setTimeout(() => {
+                if (onSuccess) {
+                    onSuccess({
+                        razorpay_order_id: orderData.id,
+                        razorpay_payment_id: `pay_mock_${Date.now()}`,
+                        razorpay_signature: `sign_mock_${Date.now()}`
+                    });
+                }
+            }, 1000); // Simulate network delay
+            return;
+        }
+
         const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
         if (!res) {

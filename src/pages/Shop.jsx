@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Check, ShieldCheck, Truck, RotateCcw, ArrowRight, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useRazorpay from '../hooks/useRazorpay';
+import { useAuth } from '../hooks/useAuth';
 import { createOrder, verifyPayment } from '../services/api';
 
 // Icons for Trust Section
@@ -24,6 +26,9 @@ const Shop = () => {
     const [isProcessing, setIsProcessing] = useState(false);
 
     const { displayRazorpay } = useRazorpay();
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const images = [
         "https://res.cloudinary.com/dkganhypn/image/upload/v1766934940/pic2_vjwyyy.jpg", // Main View
@@ -40,6 +45,12 @@ const Shop = () => {
     };
 
     const handleBuyNow = async () => {
+        if (!isAuthenticated) {
+            // Redirect to login, but save the current URL to come back after login
+            navigate('/login', { state: { from: location } });
+            return;
+        }
+
         setIsProcessing(true);
         try {
             // 1. Create Order on Backend

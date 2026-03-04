@@ -17,13 +17,10 @@ export const AuthProvider = ({ children }) => {
         const checkLoggedIn = async () => {
             try {
                 const token = localStorage.getItem('auth_token');
-                if (token) {
-                    // In a full implementation, you'd likely verify the token with the backend here.
-                    // For now, we mock a basic user object.
-                    setUser({ id: '1', name: 'Existing User' });
-
-                    // Attach token to API client requests
-                    // apiService.apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                const userData = localStorage.getItem('user_data');
+                if (token && userData) {
+                    // Populate with real stored user session
+                    setUser(JSON.parse(userData));
                 }
             } catch (error) {
                 console.error("Failed to restore session", error);
@@ -38,18 +35,14 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         setLoading(true);
         try {
-            // Replace with actual API call: const response = await apiService.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-            console.log('Mock Login attempt', { email, password });
+            const data = await apiService.loginUser(email, password);
 
-            // Mock successful response
-            const mockUser = { id: '1', name: 'Test User', email };
-            const mockToken = 'mock_jwt_token_12345';
+            // Save state securely
+            setUser(data.user);
+            localStorage.setItem('auth_token', data.token);
+            localStorage.setItem('user_data', JSON.stringify(data.user));
 
-            // Save state
-            setUser(mockUser);
-            localStorage.setItem('auth_token', mockToken);
-
-            return { success: true, user: mockUser };
+            return { success: true, user: data.user };
         } catch (error) {
             console.error("Login failed", error);
             return { success: false, error: error.message };
@@ -61,17 +54,14 @@ export const AuthProvider = ({ children }) => {
     const register = async (name, email, password) => {
         setLoading(true);
         try {
-            // Replace with actual API call
-            console.log('Mock Register attempt', { name, email, password });
+            const data = await apiService.registerUser(name, email, password);
 
-            // Mock successful response
-            const mockUser = { id: '2', name, email };
-            const mockToken = 'mock_jwt_token_67890';
+            // Save state
+            setUser(data.user);
+            localStorage.setItem('auth_token', data.token);
+            localStorage.setItem('user_data', JSON.stringify(data.user));
 
-            setUser(mockUser);
-            localStorage.setItem('auth_token', mockToken);
-
-            return { success: true, user: mockUser };
+            return { success: true, user: data.user };
         } catch (error) {
             console.error("Registration failed", error);
             return { success: false, error: error.message };
@@ -83,8 +73,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('auth_token');
-        // Remove token from API client if it was attached
-        // delete apiService.apiClient.defaults.headers.common['Authorization'];
+        localStorage.removeItem('user_data');
     };
 
     const value = {
