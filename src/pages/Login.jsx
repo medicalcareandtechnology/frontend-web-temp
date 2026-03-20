@@ -2,16 +2,31 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useGoogleLogin } from '@react-oauth/google';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login, loading } = useAuth();
+    const { login, googleLogin, loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [error, setError] = useState('');
+
+    const handleGoogleSuccess = async (tokenResponse) => {
+        const result = await googleLogin(tokenResponse.access_token);
+        if (result.success) {
+            navigate(from, { replace: true });
+        } else {
+            setError(result.error || 'Google login failed');
+        }
+    };
+
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: handleGoogleSuccess,
+        onError: () => setError('Google login failed'),
+    });
 
     const from = location.state?.from?.pathname || '/';
 
@@ -142,7 +157,7 @@ const Login = () => {
                         <button
                             type="button"
                             className="w-full group relative px-8 py-4 border border-white/30 overflow-hidden bg-transparent hover:border-white transition-colors duration-300 cursor-pointer"
-                            onClick={() => console.log('Google login clicked')}
+                            onClick={() => handleGoogleLogin()}
                         >
                             <div className="flex items-center justify-center gap-3">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

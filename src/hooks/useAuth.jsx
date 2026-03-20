@@ -76,11 +76,31 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user_data');
     };
 
+    const googleLogin = async (idToken) => {
+        setLoading(true);
+        try {
+            const data = await apiService.googleLogin(idToken);
+
+            // Save state
+            setUser(data.user);
+            localStorage.setItem('auth_token', data.token);
+            localStorage.setItem('user_data', JSON.stringify(data.user));
+
+            return { success: true, user: data.user };
+        } catch (error) {
+            console.error("Google login failed", error);
+            return { success: false, error: error.message };
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const value = {
         user,
         loading,
         login,
         register,
+        googleLogin,
         logout,
         isAuthenticated: !!user
     };

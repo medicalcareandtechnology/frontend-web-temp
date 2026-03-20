@@ -169,6 +169,15 @@ class ApiService {
     async verifyPayment(paymentData) {
         return apiClient.post('/payment/verify-payment', paymentData);
     }
+
+    /**
+     * Google Login
+     * @param {string} idToken 
+     * @returns {Promise<object>}
+     */
+    async googleLogin(idToken) {
+        return apiClient.post('/auth/google', { idToken });
+    }
 }
 
 // Export a singleton instance
