@@ -10,7 +10,8 @@ const AuthContext = createContext(null);
  */
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [isInitializing, setIsInitializing] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     // Initialization: Check if user is already logged in (e.g., has a token)
     useEffect(() => {
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
             } catch (error) {
                 console.error("Failed to restore session", error);
             } finally {
-                setLoading(false);
+                setIsInitializing(false);
             }
         };
 
@@ -87,7 +88,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {!isInitializing ? children : null}
         </AuthContext.Provider>
     );
 };

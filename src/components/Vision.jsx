@@ -8,15 +8,14 @@ const Vision = () => {
         offset: ["start end", "end start"]
     });
 
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-    const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [50, 0, 0, -50]);
+    const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+    const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [50, 0, 0, -50]);
 
     return (
-        <section ref={containerRef} className="relative py-32 bg-white overflow-hidden">
-            {/* Background Texture/Gradient - Subtle light gradient */}
-            <div className="absolute inset-0 bg-[#eff6ff]" />
+        <section ref={containerRef} className="relative py-40 overflow-hidden bg-[#e2d2c9]">
+            {/* Solid elegant background without the dark footer blend */}
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-6 relative z-10 pt-16 pb-32">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         style={{ opacity, y }}
@@ -28,25 +27,22 @@ const Vision = () => {
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.5, ease: "circOut" }}
-                            className="h-px w-24 bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"
+                            className="h-px w-24 bg-gradient-to-r from-transparent via-[#8B7355] to-transparent mx-auto"
                         />
 
                         {/* Heading */}
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-gray-900 tracking-wide leading-tight">
-                            Made for the Rhythm of <br />
-                            <span className="text-gray-500 italic">Your Life</span>
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-light text-[#3B302C] tracking-wide leading-[1.1]">
+                            Made for the <span className="italic block mt-3">Rhythm of Your Life</span>
                         </h2>
 
                         {/* Content */}
-                        <p className="text-lg md:text-xl text-gray-600 font-light leading-relaxed max-w-2xl mx-auto tracking-wide">
-                        We believe relief should be felt, not noticed. 
-                        Ease Band is designed to help you get through your day with less discomfort and more ease. 
-                        It works quietly in the background, so you can focus on your work, your plans, and everything else that matters.
+                        <p className="text-lg md:text-2xl text-[#1e1917] font-light leading-relaxed max-w-2xl mx-auto tracking-wide mix-blend-color-burn opacity-80">
+                            We believe relief should be felt, not noticed. Ease Band is designed to help you get through your day with less discomfort and more profound ease. It acts quietly in the background, offering warmth where you need it most.
                         </p>
 
                         {/* Signature/Brand Element */}
-                        <div className="pt-8 opacity-80">
-                            <span className="text-xs tracking-[0.4em] uppercase text-gray-400 font-medium">
+                        <div className="pt-16 opacity-80">
+                            <span className="text-xs tracking-[0.4em] uppercase text-[#8B7355] font-medium">
                                 Simply Better Care
                             </span>
                         </div>

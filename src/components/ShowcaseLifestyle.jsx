@@ -1,21 +1,44 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
 
 const ShowcaseLifestyle = () => {
+    const containerRef = useRef(null);
+    const cardRef = useRef(null);
+
+    // Background Slow Zoom Parallax tied to scroll
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+
+    // Dynamic Glare effect (Mouse tracking spotlight on glass card)
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const handleMouseMove = ({ currentTarget, clientX, clientY }) => {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    };
+
     return (
-        <section className="relative h-screen w-full overflow-hidden flex items-center justify-end">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
+        <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-end">
+
+            {/* Background Image with Slow Parallax Zoom */}
+            <motion.div
+                className="absolute inset-0 z-0 origin-[center_top]"
+                style={{ scale: bgScale }}
+            >
                 <img
                     src="https://res.cloudinary.com/dkganhypn/image/upload/v1766939130/ChatGPT_Image_Dec_28_2025_09_53_56_PM_sh75ov.png"
                     alt="Woman experiencing relief"
                     className="w-full h-full object-cover object-[center_top]"
                 />
-                {/* Refined Gradient - More subtle */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/70" />
-            </div>
+                {/* Refined Gradient - Darker on right to punch out text */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-black/40 to-black/90" />
+            </motion.div>
 
             {/* Subtle product context caption - positioned near waist */}
             <motion.div
@@ -38,13 +61,32 @@ const ShowcaseLifestyle = () => {
                     transition={{ duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
                     className="max-w-2xl ml-auto"
                 >
-                    {/* Elegant Content Card */}
-                    <div className="relative">
-                        {/* Decorative Corner Accents */}
-                        <div className="absolute -top-4 -left-4 w-16 h-16 border-t border-l border-white/30" />
-                        <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b border-r border-white/30" />
+                    {/* Interactive Glassmorphic Card with Dynamic Spotlight */}
+                    <div
+                        ref={cardRef}
+                        onMouseMove={handleMouseMove}
+                        className="relative group p-8 md:p-14 overflow-hidden bg-white/5 border border-white/10 backdrop-blur-2xl transition-colors duration-500 hover:border-white/20"
+                    >
+                        {/* Dynamic Glare Overlay */}
+                        <motion.div
+                            className="pointer-events-none absolute -inset-px opacity-0 transition duration-500 group-hover:opacity-100 z-0"
+                            style={{
+                                background: useMotionTemplate`
+                                    radial-gradient(
+                                        500px circle at ${mouseX}px ${mouseY}px,
+                                        rgba(255, 255, 255, 0.15),
+                                        transparent 80%
+                                    )
+                                `,
+                            }}
+                        />
 
-                        <div className="backdrop-blur-md bg-black/20 border border-white/10 p-8 md:p-12">
+                        {/* Decorative Corner Accents */}
+                        <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/30" />
+                        <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/30" />
+
+                        {/* Relative z-10 keeps text above the moving glare */}
+                        <div className="relative z-10">
                             {/* Section Label */}
                             <motion.div
                                 initial={{ scaleX: 0 }}
@@ -67,15 +109,15 @@ const ShowcaseLifestyle = () => {
                                 Engineered to vanish beneath your clothes. Designed to stand out when relief matters most.
                             </p>
 
-                            {/* Features - Minimal Style */}
-                            <div className="flex gap-8 md:gap-12 pt-6 md:pt-8 border-t border-white/20">
-                                <div>
-                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide">Silent</div>
-                                    <div className="text-xs text-gray-200 uppercase tracking-[0.2em]">Heat Therapy</div>
+                            {/* Features - Hover interactions */}
+                            <div className="flex gap-8 md:gap-16 pt-6 md:pt-8 border-t border-white/20">
+                                <div className="group/stat cursor-default">
+                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide transition-all duration-300 group-hover/stat:-translate-y-1">Silent</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-[0.2em] transition-colors duration-300 group-hover/stat:text-white">Heat Therapy</div>
                                 </div>
-                                <div>
-                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide">Discreet</div>
-                                    <div className="text-xs text-gray-200 uppercase tracking-[0.2em]">Under Clothing</div>
+                                <div className="group/stat cursor-default">
+                                    <div className="text-2xl md:text-3xl font-light text-white mb-1 tracking-wide transition-all duration-300 group-hover/stat:-translate-y-1">Discreet</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-[0.2em] transition-colors duration-300 group-hover/stat:text-white">Under Clothing</div>
                                 </div>
                             </div>
                         </div>

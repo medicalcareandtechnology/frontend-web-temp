@@ -28,48 +28,48 @@ const Login = () => {
     };
 
     return (
-        <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+        <div className="bg-[#F8F4F0] min-h-screen text-[#2D2424] selection:bg-[#C4956A] selection:text-white">
             <SEO
                 title="Login"
                 description="Securely log in to your MCT account to manage your Ease Band settings and orders."
                 url="/login"
             />
-            <Navbar />
+            <Navbar useDarkText={true} />
 
             <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
-                {/* Background Elements - Subtle and Premium */}
-                <div className="absolute inset-0 z-0 opacity-30">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px]" />
+                {/* Warm Ambient Glows — very subtle */}
+                <div className="absolute inset-0 z-0 opacity-60">
+                    <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-[#E8CFBA]/30 rounded-full blur-[140px]" />
+                    <div className="absolute bottom-[5%] left-[10%] w-[400px] h-[400px] bg-[#D4B8A0]/20 rounded-full blur-[140px]" />
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ y: 20 }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="w-full max-w-md relative z-10"
                 >
                     <div className="text-center mb-16">
                         <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            className="text-4xl font-light tracking-[0.3em] font-serif mb-4"
+                            initial={{ y: 10 }}
+                            animate={{ y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.1 }}
+                            className="text-4xl font-light tracking-[0.3em] font-serif mb-4 text-[#2D2424]"
                         >
                             MCT
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 0.4 }}
-                            className="text-xs font-light tracking-[0.4em] uppercase text-gray-400"
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="text-xs font-light tracking-[0.4em] uppercase text-[#6B5C50]"
                         >
                             Welcome Back
                         </motion.p>
                     </div>
 
                     {error && (
-                        <div className="mb-6 p-3 bg-red-900/30 border border-red-500/50 rounded text-red-200 text-xs text-center">
+                        <div className="mb-6 p-3 bg-[#F5E1E1] border border-[#D4A0A0]/40 text-[#7A2E2E] text-xs text-center">
                             {error}
                         </div>
                     )}
@@ -77,14 +77,14 @@ const Login = () => {
                     <form onSubmit={handleSubmit} className="space-y-8">
                         <div className="space-y-6">
                             <div className="group">
-                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 mb-2 group-focus-within:text-white transition-colors">
+                                <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6B5C50] mb-2 group-focus-within:text-[#C4956A] transition-colors">
                                     Email Address
                                 </label>
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-transparent focus:outline-none focus:border-white transition-all duration-500 font-light"
+                                    className="w-full bg-transparent border-b border-[#8C7A6B]/60 py-3 text-[#2D2424] placeholder-[#A89888] focus:outline-none focus:border-[#C4956A] transition-all duration-500 font-light"
                                     placeholder="Email Address"
                                     required
                                 />
@@ -92,7 +92,7 @@ const Login = () => {
 
                             <div className="group">
                                 <div className="flex justify-between items-center mb-2">
-                                    <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 group-focus-within:text-white transition-colors">
+                                    <label className="block text-[10px] font-medium tracking-[0.2em] uppercase text-[#6B5C50] group-focus-within:text-[#C4956A] transition-colors">
                                         Password
                                     </label>
                                 </div>
@@ -100,19 +100,19 @@ const Login = () => {
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-transparent focus:outline-none focus:border-white transition-all duration-500 font-light"
+                                    className="w-full bg-transparent border-b border-[#8C7A6B]/60 py-3 text-[#2D2424] placeholder-[#A89888] focus:outline-none focus:border-[#C4956A] transition-all duration-500 font-light"
                                     placeholder="Password"
                                     required
                                 />
                             </div>
                         </div>
 
-                        <div className="flex justify-between items-center text-[10px] tracking-[0.1em] text-gray-400">
-                            <label className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
-                                <input type="checkbox" className="sm:w-3 sm:h-3 rounded border-white/20 bg-transparent focus:ring-0 checked:bg-white checked:text-black" />
+                        <div className="flex justify-between items-center text-[10px] tracking-[0.1em] text-[#6B5C50]">
+                            <label className="flex items-center gap-2 cursor-pointer hover:text-[#2D2424] transition-colors">
+                                <input type="checkbox" className="sm:w-3 sm:h-3 rounded border-[#C4B5A5] bg-transparent focus:ring-0 accent-[#C4956A]" />
                                 <span className="uppercase">Remember me</span>
                             </label>
-                            <a href="#" className="uppercase hover:text-white transition-colors border-b border-transparent hover:border-white pb-0.5">
+                            <a href="#" className="uppercase hover:text-[#2D2424] transition-colors border-b border-transparent hover:border-[#C4956A] pb-0.5">
                                 Forgot Password?
                             </a>
                         </div>
@@ -121,27 +121,33 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full group relative px-8 py-4 border border-white overflow-hidden bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                                className={`w-full group relative px-8 py-4 border border-[#2D2424] overflow-hidden cursor-pointer transition-all duration-300 ${loading ? 'bg-[#2D2424] cursor-wait' : 'bg-transparent'}`}
                             >
-                                <span className="relative z-10 text-xs font-medium tracking-[0.3em] uppercase transition-colors duration-500 group-hover:text-black text-white flex justify-center items-center gap-2">
+                                <span className={`relative z-10 text-xs font-medium tracking-[0.3em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 ${loading ? 'text-white' : 'text-[#2D2424] group-hover:text-white'}`}>
+                                    {loading && (
+                                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                    )}
                                     {loading ? 'Signing In...' : 'Sign In'}
                                 </span>
-                                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                {!loading && <div className="absolute inset-0 bg-[#2D2424] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />}
                             </button>
                         </div>
 
                         <div className="relative py-2">
                             <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-white/10"></span>
+                                <span className="w-full border-t border-[#8C7A6B]/25"></span>
                             </div>
                             <div className="relative flex justify-center text-xs">
-                                <span className="bg-[#0a0a0a] px-2 text-gray-400 tracking-widest uppercase text-[10px]">Or continue with</span>
+                                <span className="bg-[#F8F4F0] px-2 text-[#6B5C50] tracking-widest uppercase text-[10px]">Or continue with</span>
                             </div>
                         </div>
 
                         <button
                             type="button"
-                            className="w-full group relative px-8 py-4 border border-white/30 overflow-hidden bg-transparent hover:border-white transition-colors duration-300 cursor-pointer"
+                            className="w-full group relative px-8 py-4 border border-[#8C7A6B]/40 overflow-hidden bg-transparent hover:border-[#2D2424]/60 transition-colors duration-300 cursor-pointer"
                             onClick={() => console.log('Google login clicked')}
                         >
                             <div className="flex items-center justify-center gap-3">
@@ -151,16 +157,16 @@ const Login = () => {
                                     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                                     <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                                 </svg>
-                                <span className="text-xs font-medium tracking-[0.2em] uppercase text-gray-300 group-hover:text-white transition-colors duration-300">
+                                <span className="text-xs font-medium tracking-[0.2em] uppercase text-[#8C7A6B] group-hover:text-[#2D2424] transition-colors duration-300">
                                     Google
                                 </span>
                             </div>
                         </button>
 
                         <div className="text-center mt-12">
-                            <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase">
+                            <p className="text-[10px] tracking-[0.2em] text-[#6B5C50] uppercase">
                                 New to MCT? {' '}
-                                <Link to="/register" className="text-white border-b border-white/30 hover:border-white pb-0.5 transition-all">
+                                <Link to="/register" className="text-[#C4956A] border-b border-[#C4956A]/30 hover:border-[#C4956A] pb-0.5 transition-all">
                                     Create Account
                                 </Link>
                             </p>

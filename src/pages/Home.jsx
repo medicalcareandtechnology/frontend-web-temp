@@ -3,13 +3,12 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 
 import ProductShowcase from '../components/ProductShowcase';
-import ShowcaseLifestyle from '../components/ShowcaseLifestyle';
+import EaseflowApp from '../components/EaseflowApp';
 import ShowcaseTech from '../components/ShowcaseTech';
 import LifestyleUsage from '../components/LifestyleUsage';
+import Vision from '../components/Vision';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-
-import Vision from '../components/Vision';
 
 function Home() {
     return (
@@ -23,7 +22,7 @@ function Home() {
             <Navbar />
             <Hero />
             <ProductShowcase />
-            <ShowcaseLifestyle />
+            <EaseflowApp />
             <ShowcaseTech />
             <LifestyleUsage />
             <Vision />

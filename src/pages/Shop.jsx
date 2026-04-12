@@ -89,7 +89,7 @@ const Shop = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen text-gray-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+        <div className="bg-[#F8F4F0] min-h-screen text-[#2D2424] font-sans selection:bg-[#C4956A] selection:text-white">
             <SEO
                 title="Shop Ease Band | Wearable Heating Pad"
                 description="Buy the Ease Band online. Intelligent heating and vibration therapy for menstrual cramps. secure checkout, free shipping in India."
@@ -106,7 +106,7 @@ const Shop = () => {
                         {/* Left: Product Visuals (Gallery + Zoom) */}
                         <div className="lg:w-1/2">
                             <div
-                                className="relative aspect-[4/5] bg-gray-50 rounded-2xl overflow-hidden cursor-crosshair mb-6"
+                                className="relative aspect-[4/5] bg-[#F2EAE4] rounded-2xl overflow-hidden cursor-crosshair mb-6"
                                 onMouseEnter={() => setIsZoomed(true)}
                                 onMouseLeave={() => setIsZoomed(false)}
                                 onMouseMove={handleMouseMove}
@@ -118,7 +118,7 @@ const Shop = () => {
                                     style={isZoomed ? { transformOrigin: `${mousePosition.x}% ${mousePosition.y}%` } : {}}
                                 />
                                 {!isZoomed && (
-                                    <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-gray-500 pointer-events-none">
+                                    <div className="absolute bottom-4 right-4 bg-[#F8F4F0]/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-[#6B5C50] pointer-events-none">
                                         Hover to Zoom
                                     </div>
                                 )}
@@ -129,7 +129,7 @@ const Shop = () => {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveImage(idx)}
-                                        className={`w-20 h-20 rounded-lg overflow-hidden transition-all flex-shrink-0 ${activeImage === idx ? 'ring-2 ring-blue-100' : 'hover:opacity-80'}`}
+                                        className={`w-20 h-20 rounded-lg overflow-hidden transition-all flex-shrink-0 ${activeImage === idx ? 'ring-2 ring-[#C4956A]' : 'hover:opacity-80'}`}
                                     >
                                         <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-cover" />
                                     </button>
@@ -141,51 +141,53 @@ const Shop = () => {
                         <div className="lg:w-1/2 flex flex-col justify-center">
                             {/* Header */}
                             <div className="mb-2 flex items-center gap-2">
-                                <span className="bg-blue-100 text-blue-800 text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">New Arrival</span>
-                                <div className="flex text-yellow-500 text-xs">
+                                <span className="bg-[#E8CFBA] text-[#6B5C50] text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">New Arrival</span>
+                                <div className="flex text-[#C4956A] text-xs">
                                     {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
-                                    <span className="text-gray-400 ml-1">(1,240+ Reviews)</span>
+                                    <span className="text-[#8C7A6B] ml-1">(1,240+ Reviews)</span>
                                 </div>
                             </div>
 
-                            <h1 className="text-4xl md:text-6xl font-serif font-medium text-gray-900 mb-4 leading-tight">
+                            <h1 className="text-4xl md:text-6xl font-serif font-medium text-[#2D2424] mb-4 leading-tight">
                                 Ease Band
                             </h1>
-                            <p className="text-xl text-gray-500 font-light mb-8 max-w-md leading-relaxed">
+                            <p className="text-xl text-[#6B5C50] font-light mb-8 max-w-md leading-relaxed">
                                 Relief that moves with you. The intelligent wearable for natural, instant comfort.
                             </p>
 
                             {/* Price Block */}
-                            <div className="bg-gray-50 p-6 rounded-xl mb-8 max-w-md">
+                            <div className="bg-[#F2EAE4] p-6 rounded-xl mb-8 max-w-md">
                                 <div className="flex items-baseline gap-3 mb-2">
-                                    <span className="text-4xl font-bold text-gray-900">₹1,999</span>
-                                    <span className="text-lg text-gray-400 line-through">₹4,999</span>
-                                    <span className="text-green-600 text-sm font-medium bg-green-100 px-2 py-1 rounded">-60% OFF</span>
+                                    <span className="text-4xl font-bold text-[#2D2424]">₹1,999</span>
+                                    <span className="text-lg text-[#8C7A6B] line-through">₹4,999</span>
+                                    <span className="text-[#6B5C50] text-sm font-medium bg-[#E8CFBA]/60 px-2 py-1 rounded">-60% OFF</span>
                                 </div>
-                                <p className="text-xs text-gray-500 mb-4">Inclusive of all taxes. Free shipping across India.</p>
+                                <p className="text-xs text-[#8C7A6B] mb-4">Inclusive of all taxes. Free shipping across India.</p>
 
                                 {/* Trust Badges - Mini */}
-                                <div className="flex gap-4 text-xs text-gray-600 font-medium py-3">
-                                    <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-blue-600" /> 1 Year Warranty</div>
-                                    <div className="flex items-center gap-1.5"><Truck size={14} className="text-blue-600" /> Free Delivery</div>
+                                <div className="flex gap-4 text-xs text-[#6B5C50] font-medium py-3">
+                                    <div className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#C4956A]" /> 1 Year Warranty</div>
+                                    <div className="flex items-center gap-1.5"><Truck size={14} className="text-[#C4956A]" /> Free Delivery</div>
                                 </div>
 
-                                {/* Primary CTA */}
+                                {/* Primary CTA (Editorial Style) */}
                                 <button
                                     onClick={handleBuyNow}
                                     disabled={isProcessing}
-                                    className="w-full bg-black text-white h-14 rounded-lg font-bold text-lg hover:bg-gray-800 transition-all transform active:scale-[0.98] shadow-lg shadow-gray-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    className={`w-full group relative h-14 border border-[#2D2424] overflow-hidden rounded-lg cursor-pointer transition-all duration-300 font-sans ${isProcessing ? 'bg-[#2D2424] cursor-wait' : 'bg-transparent'}`}
                                 >
-                                    {isProcessing ? (
-                                        <>
-                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                            PROCESSING...
-                                        </>
-                                    ) : (
-                                        "BUY NOW"
-                                    )}
+                                    <span className={`relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 ${isProcessing ? 'text-white' : 'text-[#2D2424] group-hover:text-white'}`}>
+                                        {isProcessing && (
+                                            <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                        )}
+                                        {isProcessing ? 'PROCESSING...' : 'BUY NOW'}
+                                    </span>
+                                    {!isProcessing && <div className="absolute inset-0 bg-[#2D2424] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />}
                                 </button>
-                                <p className="text-center text-[10px] text-gray-400 mt-3 font-medium uppercase tracking-wider">
+                                <p className="text-center text-[10px] text-[#8C7A6B] mt-3 font-medium uppercase tracking-wider">
                                     Safe & Secure Checkout via Razorpay
                                 </p>
                             </div>
@@ -197,11 +199,11 @@ const Shop = () => {
                                     { icon: RotateCcw, label: "7 Day Replacement" },
                                     { icon: Check, label: "100% Original Product" }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex flex-col items-center text-center gap-2 p-3 bg-white rounded-xl hover:bg-gray-50 transition-colors">
-                                        <div className="p-2 bg-gray-50 rounded-full text-gray-900">
+                                    <div key={i} className="flex flex-col items-center text-center gap-2 p-3 bg-[#F2EAE4] rounded-xl hover:bg-[#E8CFBA]/30 transition-colors">
+                                        <div className="p-2 bg-[#F8F4F0] rounded-full text-[#2D2424]">
                                             <item.icon size={18} />
                                         </div>
-                                        <span className="text-[10px] md:text-xs font-semibold text-gray-600 leading-tight">{item.label}</span>
+                                        <span className="text-[10px] md:text-xs font-semibold text-[#6B5C50] leading-tight">{item.label}</span>
                                     </div>
                                 ))}
                             </div>
@@ -211,26 +213,26 @@ const Shop = () => {
             </section>
 
             {/* 2. SECTION A: WHY THIS EXISTS (Empathic Approach) */}
-            <section className="py-24 bg-orange-50">
+            <section className="py-24 bg-[#F5ECE5]">
                 <div className="container mx-auto px-6 max-w-5xl">
                     <div className="flex flex-col md:flex-row gap-16 items-center">
                         <div className="md:w-1/2">
-                            <h2 className="text-3xl md:text-5xl font-serif text-gray-900 mb-6 leading-tight">
+                            <h2 className="text-3xl md:text-5xl font-serif text-[#2D2424] mb-6 leading-tight">
                                 Because life <br /> doesn't pause.
                             </h2>
-                            <p className="text-gray-600 leading-relaxed font-light text-lg mb-8">
+                            <p className="text-[#6B5C50] leading-relaxed font-light text-lg mb-8">
                                 We know those days. The meetings you can't skip, the classes that drag on, or just the desire to feel <i>okay</i> without relying on painkillers.
                             </p>
-                            <p className="text-gray-900 font-medium">
+                            <p className="text-[#2D2424] font-medium">
                                 Ease Band isn't a cure. It's a companion. <br />
-                                <span className="text-gray-500 font-normal">A gentle way to reclaim your day, naturally.</span>
+                                <span className="text-[#8C7A6B] font-normal">A gentle way to reclaim your day, naturally.</span>
                             </p>
                         </div>
 
                         <div className="md:w-1/2 relative">
-                            <div className="absolute inset-0 bg-blue-100 rounded-full blur-[60px] opacity-40 mix-blend-multiply"></div>
-                            <div className="relative bg-white p-8 rounded-3xl">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Designed For</h3>
+                            <div className="absolute inset-0 bg-[#D4A08A]/30 rounded-full blur-[60px] opacity-40 mix-blend-multiply"></div>
+                            <div className="relative bg-[#F8F4F0] p-8 rounded-3xl">
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-[#8C7A6B] mb-6">Designed For</h3>
                                 <ul className="space-y-4">
                                     {[
                                         "The long work meetings",
@@ -239,12 +241,12 @@ const Shop = () => {
                                         "Quiet evenings at home"
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-3 group">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 group-hover:scale-125 transition-transform"></div>
-                                            <span className="text-gray-700 font-light">{item}</span>
+                                            <div className="w-1.5 h-1.5 rounded-full bg-[#C4956A] group-hover:scale-125 transition-transform"></div>
+                                            <span className="text-[#6B5C50] font-light">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="mt-8 pt-6 text-[10px] text-gray-400 leading-relaxed italic">
+                                <div className="mt-8 pt-6 text-[10px] text-[#8C7A6B] leading-relaxed italic">
                                     Note: Ease Band provides symptom relief for menstrual cramps. It is not a medical treatment for conditions like Endometriosis.
                                 </div>
                             </div>
@@ -254,11 +256,11 @@ const Shop = () => {
             </section>
 
             {/* 3. SECTION B: KEY BENEFITS (Clean, No-Box Design) */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-[#F8F4F0]">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <div className="text-center mb-20 max-w-2xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">Relief that fits your rhythm.</h2>
-                        <p className="text-gray-500 font-light">Engineered to work around your schedule, not the other way around.</p>
+                        <h2 className="text-3xl md:text-4xl font-serif text-[#2D2424] mb-4">Relief that fits your rhythm.</h2>
+                        <p className="text-[#8C7A6B] font-light">Engineered to work around your schedule, not the other way around.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-12 md:gap-16">
@@ -277,9 +279,9 @@ const Shop = () => {
                             }
                         ].map((b, i) => (
                             <div key={i} className="flex flex-col items-start text-left space-y-4 group">
-                                <span className="text-xs font-bold tracking-widest text-[#e5e5e5] group-hover:text-black transition-colors duration-500">0{i + 1}</span>
-                                <h3 className="text-3xl font-serif text-gray-900">{b.title}</h3>
-                                <p className="text-gray-500 leading-relaxed font-light text-sm">{b.desc}</p>
+                                <span className="text-xs font-bold tracking-widest text-[#E8CFBA] group-hover:text-[#2D2424] transition-colors duration-500">0{i + 1}</span>
+                                <h3 className="text-3xl font-serif text-[#2D2424]">{b.title}</h3>
+                                <p className="text-[#8C7A6B] leading-relaxed font-light text-sm">{b.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -287,7 +289,7 @@ const Shop = () => {
             </section >
 
             {/* 4. SECTION C: HOW IT WORKS */}
-            < section className="py-20 bg-black text-white" >
+            < section className="py-20 bg-[#2D2424] text-[#F8F4F0]" >
                 <div className="container mx-auto px-6 max-w-5xl text-center">
                     <h2 className="text-3xl md:text-5xl font-serif mb-16">Simple as 1, 2, 3.</h2>
 
@@ -300,11 +302,11 @@ const Shop = () => {
                             { step: "03", title: "Live Free", desc: "Go about your day while the warmth melts the tension away." }
                         ].map((s, i) => (
                             <div key={i} className="relative z-10 flex flex-col items-center">
-                                <div className="w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center text-3xl font-serif italic mb-6 shadow-2xl shadow-blue-900/20">
+                                <div className="w-24 h-24 bg-[#1A1414] rounded-full flex items-center justify-center text-[#C4956A] text-3xl font-serif italic mb-6 shadow-2xl shadow-black/20">
                                     {s.step}
                                 </div>
                                 <h3 className="text-xl font-medium mb-3">{s.title}</h3>
-                                <p className="text-gray-400 text-sm max-w-xs">{s.desc}</p>
+                                <p className="text-[#C4B5A5] text-sm max-w-xs font-light">{s.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -312,41 +314,41 @@ const Shop = () => {
             </section>
 
             {/* 5. SECTION D: PROOF / TRUST */}
-            <section className="py-24 bg-blue-50">
+            <section className="py-24 bg-[#F2EAE4]">
                 <div className="container mx-auto px-6 max-w-4xl text-center">
-                    <div className="flex justify-center text-yellow-500 mb-6 gap-1">
+                    <div className="flex justify-center text-[#C4956A] mb-6 gap-1">
                         {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="currentColor" size={24} />)}
                     </div>
-                    <h2 className="text-2xl md:text-4xl font-serif text-gray-900 mb-6">
+                    <h2 className="text-2xl md:text-4xl font-serif text-[#2D2424] mb-6">
                         "I used to take leave every month. Now I just take my Ease Band."
                     </h2>
                     <div className="flex items-center justify-center gap-4 mb-16">
-                        <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="w-12 h-12 bg-[#E8CFBA] rounded-full overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="User" />
                         </div>
                         <div className="text-left">
-                            <div className="font-bold text-gray-900 text-sm">Priya S.</div>
-                            <div className="text-xs text-gray-500 uppercase tracking-wider">Verified Purchase • Bangalore</div>
+                            <div className="font-bold text-[#2D2424] text-sm">Priya S.</div>
+                            <div className="text-xs text-[#8C7A6B] uppercase tracking-wider">Verified Purchase • Bangalore</div>
                         </div>
                     </div>
 
                     <div className="pt-12">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Secured & Powered By</p>
+                        <p className="text-xs font-bold text-[#8C7A6B] uppercase tracking-widest mb-6">Secured & Powered By</p>
                         <div className="flex justify-center gap-8 opacity-50 grayscale">
                             {/* Replaced with text placeholders for reliability if SVGs missing */}
-                            <span className="font-bold text-xl">Razorpay</span>
-                            <span className="font-bold text-xl">UPI</span>
-                            <span className="font-bold text-xl">VISA</span>
-                            <span className="font-bold text-xl">RuPay</span>
+                            <span className="font-bold text-xl text-[#2D2424]">Razorpay</span>
+                            <span className="font-bold text-xl text-[#2D2424]">UPI</span>
+                            <span className="font-bold text-xl text-[#2D2424]">VISA</span>
+                            <span className="font-bold text-xl text-[#2D2424]">RuPay</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* 6. SECTION E: FINAL CTA (Immersive Anchor) */}
-            <section className="py-32 bg-[#050505] text-white relative overflow-hidden">
+            <section className="py-32 bg-[#050505] text-[#F8F4F0] relative overflow-hidden">
                 {/* Subtle Background Glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-900/10 blur-[120px] pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[#8B5E6B]/15 blur-[120px] pointer-events-none" />
 
                 <div className="container mx-auto px-6 relative z-10 text-center">
                     <div className="max-w-3xl mx-auto space-y-12">
@@ -356,19 +358,29 @@ const Shop = () => {
 
                         {/* Divider removed */}
 
-                        <p className="text-lg text-gray-400 font-light tracking-wide max-w-xl mx-auto">
+                        <p className="text-lg text-[#8C7A6B] font-light tracking-wide max-w-xl mx-auto">
                             Join the thousands of women who have already chosen freedom over pain.
                         </p>
 
                         <div className="flex flex-col items-center gap-6">
-                            <button className="group relative px-12 py-5 bg-white text-black overflow-hidden rounded-none min-w-[280px]">
-                                <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 group-hover:text-white">
-                                    Get Ease Band — ₹1,999
+                            <button
+                                onClick={handleBuyNow}
+                                disabled={isProcessing}
+                                className={`group relative px-12 py-5 border border-[#F8F4F0] overflow-hidden rounded-none min-w-[280px] transition-all duration-300 ${isProcessing ? 'bg-[#F8F4F0] cursor-wait' : 'bg-transparent cursor-pointer'}`}
+                            >
+                                <span className={`relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 ${isProcessing ? 'text-[#050505]' : 'text-[#F8F4F0] group-hover:text-[#2D2424]'}`}>
+                                    {isProcessing && (
+                                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                    )}
+                                    {isProcessing ? 'PROCESSING...' : 'Get Ease Band — ₹1,999'}
                                 </span>
-                                <div className="absolute inset-0 bg-[#1a1a1a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                {!isProcessing && <div className="absolute inset-0 bg-[#F8F4F0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />}
                             </button>
 
-                            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500">
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">
                                 7-Day Risk-Free Trial · Free Shipping
                             </p>
                         </div>
