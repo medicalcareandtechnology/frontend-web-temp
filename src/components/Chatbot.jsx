@@ -1,11 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Send, MessageSquare } from 'lucide-react';
 import { sendChatMessage, getContactInfo } from '../services/chatbotService';
 
 const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hello! I\'m your MCT assistant. I\'m here to help you learn about the Ease Band and how it can provide relief from menstrual cramps. How can I assist you today?',
+      content: "Welcome to the world of MCT. I'm your Virtual Assistant, ready to guide you on a journey of excellence and innovation. How can I assist you today? Feel free to ask a question or select from topics below.",
       timestamp: new Date()
     }
   ]);
@@ -25,13 +27,12 @@ const Chatbot = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+      setTimeout(() => inputRef.current.focus(), 600);
     }
   }, [isOpen]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-
     if (!inputMessage.trim() || isLoading) return;
 
     const userMessage = {
@@ -65,7 +66,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       const contactInfo = getContactInfo();
       const errorMessage = {
         role: 'assistant',
-        content: `Sorry, I encountered an error. Please contact our support team at ${contactInfo.email} for assistance.`,
+        content: `I apologize, but I encountered a technical difficulty. Please reach out to our support team at ${contactInfo.email} for direct assistance.`,
         timestamp: new Date()
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -80,166 +81,134 @@ const Chatbot = ({ isOpen, onClose }) => {
     inputRef.current?.focus();
   };
 
-  const initialQuestions = [
-    'How does Ease Band relieve period cramps?',
-    'What are the key features?',
-    'How long does the battery last?'
+  const suggestions = [
+    'How does Ease Band work?',
+    'Key features',
+    'Battery life',
+    'Daily usage',
+    'Shipping info',
+    'Warranty details'
   ];
-
-  const suggestedQuestions = [
-    'Is it safe to use daily?',
-    'How do I clean the Ease Band?',
-    'What is the warranty?',
-    'How much does it cost?',
-    'Can I wear it while sleeping?',
-    'Is it waterproof?'
-  ];
-
-  // Get random 3 suggested questions
-  const getRandomSuggestions = () => {
-    const shuffled = [...suggestedQuestions].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
-  };
-
-  const [currentSuggestions, setCurrentSuggestions] = useState(getRandomSuggestions());
-
-  useEffect(() => {
-    if (showSuggestions && messages.length > 1) {
-      setCurrentSuggestions(getRandomSuggestions());
-    }
-  }, [showSuggestions, messages.length]);
-
-  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-end p-6">
-      <div className="w-full max-w-md h-[600px] bg-white border-2 border-blue-500 flex flex-col shadow-2xl">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b-2 border-blue-100 bg-gradient-to-r from-blue-50 to-white">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-blue-500 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-white">
-                <path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm2 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-gray-900 font-medium text-lg tracking-wide">Medical Assistant</h3>
-              <span className="text-blue-600 text-xs font-medium tracking-wider uppercase flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse"></span>
-                Available 24/7
-              </span>
-            </div>
-          </div>
-          <button
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay - Dimmed background */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={onClose}
-            aria-label="Close chat"
-            className="text-gray-500 hover:text-gray-900 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
+            className="fixed inset-0 bg-black/60 backdrop-blur-[2px] z-[60]"
+          />
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
-          {messages.map((message, index) => (
-            <div key={index}>
-              <div
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+          {/* Panel - Slides from Right */}
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-0 right-0 h-full w-full max-w-lg bg-[#1A1A1A] text-white z-[70] flex flex-col shadow-2xl"
+          >
+            {/* Header - Lamborghini Style */}
+            <div className="flex items-center justify-between p-10 bg-[#222222] border-b border-white/5">
+              <h2 className="text-3xl font-bold tracking-tight uppercase font-sans">Ask Me</h2>
+              <button
+                onClick={onClose}
+                className="w-12 h-12 flex items-center justify-center border border-white/40 hover:border-white transition-colors"
+                aria-label="Close"
               >
-                <div className={`max-w-[80%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
-                  <div
-                    className={`px-4 py-3 ${message.role === 'user'
-                        ? 'bg-blue-500'
-                        : 'bg-white border-2 border-blue-100'
+                <X size={24} className="text-white" />
+              </button>
+            </div>
+
+            {/* Messages Area */}
+            <div className="flex-1 overflow-y-auto p-10 space-y-10 no-scrollbar">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div className={`max-w-[90%]`}>
+                    <div
+                      className={`px-8 py-10 rounded-[2rem] ${
+                        message.role === 'user'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-[#2A2A2A] text-gray-100 shadow-xl'
                       }`}
-                  >
-                    <p className={`text-sm font-light leading-relaxed ${message.role === 'user' ? 'text-white' : 'text-gray-800'}`}>{message.content}</p>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 px-1 font-light">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    >
+                      <p className="text-lg leading-relaxed font-light">{message.content}</p>
+                      
+                      {/* Sub-notice Style for Assistant (like the "INFORMATION NOTICE" in screenshot) */}
+                      {message.role === 'assistant' && index === 0 && (
+                        <div className="mt-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer group">
+                           <span className="text-xs uppercase tracking-widest border-b border-transparent group-hover:border-white">Information Notice</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
 
-              {/* Show suggestions after assistant messages */}
-              {message.role === 'assistant' && index === messages.length - 1 && showSuggestions && messages.length > 1 && (
-                <div className="mt-3 space-y-2">
-                  <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">You might also ask:</p>
-                  {currentSuggestions.map((question, qIndex) => (
-                    <button
-                      key={qIndex}
-                      onClick={() => handleQuickQuestion(question)}
-                      className="w-full text-left px-3 py-2 text-xs text-gray-700 bg-white border border-blue-200 hover:border-blue-500 hover:bg-blue-50 transition-all font-light rounded"
-                    >
-                      {question}
-                    </button>
-                  ))}
+              {/* Suggestions Section - Styled like screenshot "proposed topics" */}
+              {showSuggestions && !isLoading && (
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-300 font-light">
+                    You can ask me a question or choose from the proposed topics.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {suggestions.map((q, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleQuickQuestion(q)}
+                        className="px-6 py-3 bg-[#333333] hover:bg-[#444444] rounded-full text-sm text-white/90 transition-all duration-300 flex items-center gap-3 border border-white/5"
+                      >
+                        <MessageSquare size={16} />
+                        {q}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-white border-2 border-blue-100 px-4 py-3">
-                <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></span>
-                  <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                  <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="flex gap-1.5 p-4">
+                    <motion.span animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                    <motion.span animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                    <motion.span animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                  </div>
                 </div>
-              </div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
 
-        {/* Initial Quick Questions */}
-        {messages.length === 1 && (
-          <div className="px-6 py-4 border-t-2 border-blue-100 bg-white">
-            <p className="text-gray-600 text-xs uppercase tracking-wider mb-3 font-medium">Quick questions:</p>
-            <div className="space-y-2">
-              {initialQuestions.map((question, index) => (
+            {/* Input Area - Minimalist like screenshot */}
+            <div className="p-10 bg-[#1A1A1A] border-t border-white/10">
+              <form onSubmit={handleSendMessage} className="flex items-center gap-4 group">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  placeholder="Ask your question here"
+                  className="w-full bg-transparent border-none py-4 text-xl font-light text-white placeholder:text-gray-500 focus:outline-none focus:ring-0 transition-all"
+                  disabled={isLoading}
+                />
                 <button
-                  key={index}
-                  onClick={() => handleQuickQuestion(question)}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 border-2 border-blue-200 hover:border-blue-500 hover:bg-blue-50 transition-all font-light"
+                  type="submit"
+                  disabled={!inputMessage.trim() || isLoading}
+                  className="p-2 text-gray-400 hover:text-white disabled:opacity-20 transition-all transform hover:translate-x-1"
                 >
-                  {question}
+                  <Send size={28} strokeWidth={1.5} />
                 </button>
-              ))}
+              </form>
             </div>
-          </div>
-        )}
-
-        {/* Input */}
-        <form onSubmit={handleSendMessage} className="p-6 border-t-2 border-blue-100 bg-white">
-          <div className="flex gap-3">
-            <input
-              ref={inputRef}
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1 px-4 py-3 bg-gray-50 border-2 border-blue-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors font-light text-sm"
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              className="px-4 py-3 bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-              disabled={!inputMessage.trim() || isLoading}
-              aria-label="Send message"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

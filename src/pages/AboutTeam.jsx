@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
@@ -107,7 +106,6 @@ const AboutTeam = () => {
                 description="Meet the technical, R&D, and IT experts behind MCT Ease Band."
                 url="/team"
             />
-            <Navbar />
 
             <div className="pt-32 pb-20 px-6 md:px-12 relative overflow-hidden">
                 {/* Background Ambient Glow */}

@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Box } from 'lucide-react';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Features from '../components/Features';
 import Demo from '../components/Demo';
@@ -17,7 +16,6 @@ const ProductDetail = () => {
     if (!product) {
         return (
             <div className="bg-[#0a0a0a] min-h-screen text-white">
-                <Navbar />
                 <div className="container mx-auto px-6 py-24 text-center">
                     <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
                     <p className="text-gray-400 mb-8">The product you're looking for doesn't exist.</p>
@@ -36,7 +34,6 @@ const ProductDetail = () => {
 
     return (
         <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-blue-500 selection:text-white">
-            <Navbar darkMode={true} />
 
             {/* Product Detail Section */}
             <section className="py-24 bg-white text-black">

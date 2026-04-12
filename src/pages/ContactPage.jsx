@@ -5,7 +5,6 @@ import { Send, ArrowLeft, MessageSquare, Clock, CheckCircle, AlertCircle, Phone,
 import { Link } from 'react-router-dom';
 import { submitContactForm } from '../services/api';
 import SEO from '../components/SEO';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ContactPage = () => {
@@ -56,7 +55,6 @@ const ContactPage = () => {
                 url="/contact"
             />
 
-            <Navbar useDarkText={true} />
 
             <main className="flex-grow flex flex-col items-center pt-32 pb-20 px-6">
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 
 const Register = () => {
@@ -32,7 +31,6 @@ const Register = () => {
                 description="Join MCT to access premium menstrual relief products. Create your account today."
                 url="/register"
             />
-            <Navbar useDarkText={true} />
 
             <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-20">
                 {/* Warm Ambient Glows — very subtle */}

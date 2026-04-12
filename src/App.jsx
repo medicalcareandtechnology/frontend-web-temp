@@ -6,10 +6,8 @@ import Home from './pages/Home';
 import ContactPage from './pages/ContactPage';
 import ComingSoon from './pages/ComingSoon';
 import Chatbot from './components/Chatbot';
-import ChatbotButton from './components/ChatbotButton';
+import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
-
-
 
 import Shop from './pages/Shop';
 import Login from './pages/Login';
@@ -26,6 +24,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <Navbar toggleChatbot={toggleChatbot} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -36,11 +35,11 @@ function App() {
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
 
-      {/* Chatbot components - available on all pages */}
-      {!isChatbotOpen && <ChatbotButton onClick={toggleChatbot} />}
+      {/* Chatbot panel - available on all pages */}
       <Chatbot isOpen={isChatbotOpen} onClose={toggleChatbot} />
     </>
   );
 }
 
 export default App;
+

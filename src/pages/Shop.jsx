@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Check, ShieldCheck, Truck, RotateCcw, ArrowRight, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useRazorpay from '../hooks/useRazorpay';
@@ -96,7 +95,6 @@ const Shop = () => {
                 keywords="buy ease band, Ease Band price, heating pad for periods, menstrual relief device shop"
                 url="/shop"
             />
-            <Navbar useDarkText={true} />
 
             {/* 1. ABOVE THE FOLD */}
             <section className="pt-12 pb-24 md:pt-20 px-6">

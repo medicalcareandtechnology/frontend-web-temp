@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import { subscribeToNewsletter } from '../services/api';
 
 const ComingSoon = () => {
@@ -25,7 +24,6 @@ const ComingSoon = () => {
 
     return (
         <div className="min-h-screen bg-black text-white">
-            <Navbar darkMode={true} />
 
             <section className="h-screen flex items-center justify-center relative overflow-hidden">
 

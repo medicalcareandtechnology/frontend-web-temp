@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageSquare } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = ({ useDarkText = false }) => {
+const Navbar = ({ toggleChatbot }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
+    
+    // Determine if we should use dark text based on route
+    const darkRoutes = ['/shop', '/login', '/register', '/contact'];
+    const useDarkText = darkRoutes.includes(location.pathname);
+
     const isHomePage = location.pathname === '/';
     const isShopPage = location.pathname === '/shop';
     const isContactPage = location.pathname === '/contact';
@@ -38,7 +43,7 @@ const Navbar = ({ useDarkText = false }) => {
                     <img
                         src="https://res.cloudinary.com/dkganhypn/image/upload/v1769610206/logo_long-removebg_ssuij7.png"
                         alt="MCT Logo"
-                        className={`transition-all duration-300 w-auto ${isScrolled ? 'h-10' : 'h-14 md:h-16'}`}
+                        className={`transition-all duration-300 w-auto ${isScrolled ? 'h-10' : 'h-14 md:h-16'} ${isScrolled || !useDarkText ? '' : 'invert'}`}
                     />
                 </Link>
 
@@ -81,10 +86,19 @@ const Navbar = ({ useDarkText = false }) => {
                             <span className={`absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${isScrolled || !useDarkText ? 'bg-white' : 'bg-black'}`} />
                         </Link>
                     )}
+
+                    {/* Chat Icon - Desktop */}
+                    <button
+                        onClick={toggleChatbot}
+                        className={`group relative transition-all duration-300 hover:scale-110 ${textColorClass}`}
+                        aria-label="Open Chat"
+                    >
+                        <MessageSquare size={20} strokeWidth={1.5} />
+                    </button>
                 </div>
 
                 {/* CTA Button - Luxury */}
-                <div className="hidden md:block">
+                <div className="hidden md:flex items-center gap-6">
                     {!isShopPage && (
                         <Link
                             to="/shop"
@@ -98,13 +112,24 @@ const Navbar = ({ useDarkText = false }) => {
                     )}
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className={`md:hidden ${textColorClass}`}
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                {/* Mobile Icons Area */}
+                <div className="flex md:hidden items-center gap-6">
+                    <button
+                        onClick={toggleChatbot}
+                        className={textColorClass}
+                        aria-label="Open Chat"
+                    >
+                        <MessageSquare size={20} />
+                    </button>
+                    
+                    {/* Mobile Menu Button */}
+                    <button
+                        className={textColorClass}
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}
@@ -175,3 +200,4 @@ const Navbar = ({ useDarkText = false }) => {
 };
 
 export default Navbar;
+

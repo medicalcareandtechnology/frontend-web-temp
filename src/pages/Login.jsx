@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 
 const Login = () => {
@@ -34,7 +33,6 @@ const Login = () => {
                 description="Securely log in to your MCT account to manage your Ease Band settings and orders."
                 url="/login"
             />
-            <Navbar useDarkText={true} />
 
             <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
                 {/* Warm Ambient Glows — very subtle */}
