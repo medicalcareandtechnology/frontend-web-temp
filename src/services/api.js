@@ -169,6 +169,15 @@ class ApiService {
     async verifyPayment(paymentData) {
         return apiClient.post('/payment/verify-payment', paymentData);
     }
+
+    /**
+     * Validate a pincode for delivery serviceability
+     * @param {string} pincode - 6-digit Indian pincode
+     * @returns {Promise<object>} { serviceable, city, state, estimatedDays }
+     */
+    async validatePincode(pincode) {
+        return apiClient.get(`/shipping/validate-pincode/${pincode}`);
+    }
 }
 
 // Export a singleton instance
@@ -185,3 +194,6 @@ export const subscribeToNewsletter = (email) => apiService.subscribeToNewsletter
 // Payment exports
 export const createOrder = (amount) => apiService.createOrder(amount);
 export const verifyPayment = (paymentData) => apiService.verifyPayment(paymentData);
+
+// Shipping exports
+export const validatePincode = (pincode) => apiService.validatePincode(pincode);

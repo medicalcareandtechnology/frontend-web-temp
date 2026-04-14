@@ -4,9 +4,7 @@ import { Star, Check, ShieldCheck, Truck, RotateCcw, ArrowRight, X } from 'lucid
 import { useNavigate, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import useRazorpay from '../hooks/useRazorpay';
 import { useAuth } from '../hooks/useAuth';
-import { createOrder, verifyPayment } from '../services/api';
 
 // Icons for Trust Section
 const CODIcon = () => (
@@ -18,13 +16,10 @@ const CODIcon = () => (
 );
 
 const Shop = () => {
-    // Zoom/Gallery State
     const [activeImage, setActiveImage] = useState(0);
     const [isZoomed, setIsZoomed] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isProcessing, setIsProcessing] = useState(false);
 
-    const { displayRazorpay } = useRazorpay();
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -43,48 +38,12 @@ const Shop = () => {
         setMousePosition({ x, y });
     };
 
-    const handleBuyNow = async () => {
+    const handleBuyNow = () => {
         if (!isAuthenticated) {
-            // Redirect to login, but save the current URL to come back after login
             navigate('/login', { state: { from: location } });
             return;
         }
-
-        setIsProcessing(true);
-        try {
-            // 1. Create Order on Backend
-            const orderData = await createOrder(1999); // Amount in INR
-
-            // 2. Open Razorpay Checkout
-            await displayRazorpay(
-                orderData,
-                async (paymentData) => {
-                    // 3. On Success, Verify Payment
-                    try {
-                        const verificationResult = await verifyPayment(paymentData);
-                        if (verificationResult.success) {
-                            alert("Payment Successful! Your Ease Band is on its way.");
-                            // Optional: Redirect to success page
-                        } else {
-                            alert("Payment verification failed. Please contact support.");
-                        }
-                    } catch (verifyError) {
-                        console.error("Verification Error", verifyError);
-                        alert("Payment Successful but verification failed. Please contact support.");
-                    }
-                },
-                (error) => {
-                    console.error("Payment Failed", error);
-                    alert(`Payment Failed: ${error.description}`);
-                }
-            );
-
-        } catch (error) {
-            console.error("Transaction Error", error);
-            alert("Could not initiate transaction. Please try again later.");
-        } finally {
-            setIsProcessing(false);
-        }
+        navigate('/checkout');
     };
 
     return (
@@ -171,19 +130,12 @@ const Shop = () => {
                                 {/* Primary CTA (Editorial Style) */}
                                 <button
                                     onClick={handleBuyNow}
-                                    disabled={isProcessing}
-                                    className={`w-full group relative h-14 border border-[#2D2424] overflow-hidden rounded-lg cursor-pointer transition-all duration-300 font-sans ${isProcessing ? 'bg-[#2D2424] cursor-wait' : 'bg-transparent'}`}
+                                    className="w-full group relative h-14 border border-[#2D2424] overflow-hidden rounded-lg cursor-pointer transition-all duration-300 font-sans bg-transparent"
                                 >
-                                    <span className={`relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 ${isProcessing ? 'text-white' : 'text-[#2D2424] group-hover:text-white'}`}>
-                                        {isProcessing && (
-                                            <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                        )}
-                                        {isProcessing ? 'PROCESSING...' : 'BUY NOW'}
+                                    <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 text-[#2D2424] group-hover:text-white">
+                                        BUY NOW
                                     </span>
-                                    {!isProcessing && <div className="absolute inset-0 bg-[#2D2424] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />}
+                                    <div className="absolute inset-0 bg-[#2D2424] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 </button>
                                 <p className="text-center text-[10px] text-[#8C7A6B] mt-3 font-medium uppercase tracking-wider">
                                     Safe & Secure Checkout via Razorpay
@@ -363,19 +315,12 @@ const Shop = () => {
                         <div className="flex flex-col items-center gap-6">
                             <button
                                 onClick={handleBuyNow}
-                                disabled={isProcessing}
-                                className={`group relative px-12 py-5 border border-[#F8F4F0] overflow-hidden rounded-none min-w-[280px] transition-all duration-300 ${isProcessing ? 'bg-[#F8F4F0] cursor-wait' : 'bg-transparent cursor-pointer'}`}
+                                className="group relative px-12 py-5 border border-[#F8F4F0] overflow-hidden rounded-none min-w-[280px] transition-all duration-300 bg-transparent cursor-pointer"
                             >
-                                <span className={`relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 ${isProcessing ? 'text-[#050505]' : 'text-[#F8F4F0] group-hover:text-[#2D2424]'}`}>
-                                    {isProcessing && (
-                                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                    )}
-                                    {isProcessing ? 'PROCESSING...' : 'Get Ease Band — ₹1,999'}
+                                <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 text-[#F8F4F0] group-hover:text-[#2D2424]">
+                                    Get Ease Band — ₹1,999
                                 </span>
-                                {!isProcessing && <div className="absolute inset-0 bg-[#F8F4F0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />}
+                                <div className="absolute inset-0 bg-[#F8F4F0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             </button>
 
                             <p className="text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">

@@ -10,6 +10,8 @@ import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 
 import Shop from './pages/Shop';
+import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AboutTeam from './pages/AboutTeam';
@@ -29,6 +31,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/team" element={<AboutTeam />} />
