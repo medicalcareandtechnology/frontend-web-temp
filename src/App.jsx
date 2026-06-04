@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import ContactPage from './pages/ContactPage';
 import ComingSoon from './pages/ComingSoon';
@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Navigate to="/coming-soon" replace />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/login" element={<Login />} />

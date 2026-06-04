@@ -224,8 +224,8 @@ const Shop = () => {
                                 desc: "Paper-thin profile means you can wear it under anything. Your secret source of comfort."
                             },
                             {
-                                title: "All Day",
-                                desc: "One charge lasts 8 hours. From your morning commute to your evening unwind."
+                                title: "Lasting Relief",
+                                desc: "One charge lasts 4 hours. Quick to recharge and ready when you are."
                             }
                         ].map((b, i) => (
                             <div key={i} className="flex flex-col items-start text-left space-y-4 group">

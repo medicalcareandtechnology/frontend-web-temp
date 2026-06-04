@@ -6,10 +6,12 @@ import { subscribeToNewsletter } from '../services/api';
 const ComingSoon = () => {
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (email) {
+            setIsSubmitting(true);
             try {
                 await subscribeToNewsletter(email);
                 setIsSubmitted(true);
@@ -18,6 +20,8 @@ const ComingSoon = () => {
                 // Since no-cors, we might not get errors easily, but if network fails we will.
                 // For now, assume success if no network error.
                 setIsSubmitted(true);
+            } finally {
+                setIsSubmitting(false);
             }
         }
     };
@@ -60,20 +64,22 @@ const ComingSoon = () => {
                         >
                             {!isSubmitted ? (
                                 <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email address"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                        className="flex-1 bg-transparent border border-white/30 text-white px-6 py-4 outline-none focus:border-white transition-colors placeholder:text-gray-600 font-light"
-                                    />
-                                    <button
-                                        type="submit"
-                                        className="bg-white text-black px-8 py-4 font-medium tracking-[0.2em] uppercase hover:bg-gray-200 transition-colors"
-                                    >
-                                        Notify Me
-                                    </button>
+                                     <input
+                                         type="email"
+                                         placeholder="Enter your email address"
+                                         value={email}
+                                         onChange={(e) => setEmail(e.target.value)}
+                                         required
+                                         disabled={isSubmitting}
+                                         className="flex-1 bg-transparent border border-white/30 text-white px-6 py-4 outline-none focus:border-white transition-colors placeholder:text-gray-600 font-light disabled:opacity-50"
+                                     />
+                                     <button
+                                         type="submit"
+                                         disabled={isSubmitting}
+                                         className="bg-white text-black px-8 py-4 font-medium tracking-[0.2em] uppercase hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-w-[180px]"
+                                     >
+                                         {isSubmitting ? 'Sending...' : 'Notify Me'}
+                                     </button>
                                 </form>
                             ) : (
                                 <motion.div

@@ -175,12 +175,12 @@ const ShowcaseTech = () => {
                             >
                                 <MagneticCard className="h-full min-h-[300px]">
                                     <div className="text-5xl font-light text-[#3B302C] mb-2 font-serif tracking-tight transition-transform duration-700 group-hover:scale-105 origin-left">
-                                        8 Hours
+                                        4 Hours
                                     </div>
                                     <div className="h-px w-16 bg-[#B58B80] mb-5 transition-all duration-700 group-hover:w-24" />
                                     <h3 className="text-xl font-light text-[#3B302C] mb-3 tracking-[0.1em] uppercase">Lasting Relief</h3>
                                     <p className="text-[#5A504C] leading-relaxed font-light text-base">
-                                        Experience uninterrupted comfort from dawn to dusk. Engineered to support you effortlessly all day.
+                                        Experience uninterrupted comfort. Engineered to support you effortlessly.
                                     </p>
                                 </MagneticCard>
                             </motion.div>

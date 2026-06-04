@@ -159,7 +159,7 @@ const EaseflowApp = () => {
                     ))}
                 </div>
                 
-                {/* Download CTA - Centered below the assembly */}
+                {/* Download CTA - Centered below the assembly (Hidden for easeflow app)
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -189,6 +189,7 @@ const EaseflowApp = () => {
                         </div>
                     </a>
                 </motion.div>
+                */}
 
             </div>
         </section>

@@ -98,13 +98,25 @@ class ApiService {
         return apiClient.post('/auth/login', { email, password });
     }
 
-    /**
-     * Submit contact form data
-     * @param {object} formData 
-     * @returns {Promise<object>}
-     */
     async submitContactForm(formData) {
-        return apiClient.post('/contact', formData);
+        const contactUrl = import.meta.env.VITE_MCT_CONTACT;
+        if (!contactUrl) {
+            return apiClient.post('/contact', formData);
+        }
+
+        try {
+            await fetch(contactUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(formData),
+            });
+            return { success: true };
+        } catch (error) {
+            throw new Error('Failed to send message.');
+        }
     }
 
     /**
