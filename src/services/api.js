@@ -190,6 +190,15 @@ class ApiService {
     async validatePincode(pincode) {
         return apiClient.get(`/shipping/validate-pincode/${pincode}`);
     }
+
+    /**
+     * Google Login
+     * @param {string} idToken 
+     * @returns {Promise<object>}
+     */
+    async googleLogin(idToken) {
+        return apiClient.post('/auth/google', { idToken });
+    }
 }
 
 // Export a singleton instance
@@ -209,3 +218,6 @@ export const verifyPayment = (paymentData) => apiService.verifyPayment(paymentDa
 
 // Shipping exports
 export const validatePincode = (pincode) => apiService.validatePincode(pincode);
+
+// Google Auth export
+export const googleLogin = (idToken) => apiService.googleLogin(idToken);
