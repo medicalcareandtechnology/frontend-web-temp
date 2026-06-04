@@ -21,9 +21,9 @@ function Home() {
             />
             <Hero />
             <ProductShowcase />
+            <ShowcaseLifestyle />
             <EaseflowApp />
             <ShowcaseTech />
-            <ShowcaseLifestyle />
             <LifestyleUsage />
             <Vision />
             <Footer />
