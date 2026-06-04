@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import ProductShowcase from '../components/ProductShowcase';
 import EaseflowApp from '../components/EaseflowApp';
 import ShowcaseTech from '../components/ShowcaseTech';
+import ShowcaseLifestyle from '../components/ShowcaseLifestyle';
 import LifestyleUsage from '../components/LifestyleUsage';
 import Vision from '../components/Vision';
 import Footer from '../components/Footer';
@@ -22,6 +23,7 @@ function Home() {
             <ProductShowcase />
             <EaseflowApp />
             <ShowcaseTech />
+            <ShowcaseLifestyle />
             <LifestyleUsage />
             <Vision />
             <Footer />
