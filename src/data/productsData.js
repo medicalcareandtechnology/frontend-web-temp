@@ -1,5 +1,3 @@
-import neoarmImage from '../assets/neoarm_1.jpeg';
-import modelPath from '../assets/model/neoarm.glb?url';
 
 export const products = [
 

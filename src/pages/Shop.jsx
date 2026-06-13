@@ -39,11 +39,7 @@ const Shop = () => {
     };
 
     const handleBuyNow = () => {
-        if (!isAuthenticated) {
-            navigate('/login', { state: { from: location } });
-            return;
-        }
-        navigate('/checkout');
+        navigate('/pre-order');
     };
 
     return (
@@ -133,7 +129,7 @@ const Shop = () => {
                                     className="w-full group relative h-14 border border-[#2D2424] overflow-hidden rounded-lg cursor-pointer transition-all duration-300 font-sans bg-transparent"
                                 >
                                     <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 text-[#2D2424] group-hover:text-white">
-                                        BUY NOW
+                                        PRE-ORDER NOW
                                     </span>
                                     <div className="absolute inset-0 bg-[#2D2424] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 </button>
@@ -318,7 +314,7 @@ const Shop = () => {
                                 className="group relative px-12 py-5 border border-[#F8F4F0] overflow-hidden rounded-none min-w-[280px] transition-all duration-300 bg-transparent cursor-pointer"
                             >
                                 <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 text-[#F8F4F0] group-hover:text-[#2D2424]">
-                                    Get Ease Band — ₹1,999
+                                    PRE-ORDER Ease Band — ₹1,999
                                 </span>
                                 <div className="absolute inset-0 bg-[#F8F4F0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             </button>

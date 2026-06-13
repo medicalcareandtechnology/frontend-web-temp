@@ -160,6 +160,34 @@ class ApiService {
         }
     }
 
+    /**
+     * Submit pre-order form data
+     * @param {object} data
+     * @returns {Promise<object>}
+     */
+    async submitPreOrder(data) {
+        const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_PREORDER_URL;
+        if (!scriptUrl) {
+            // For dev testing when URL is missing
+            console.warn('VITE_GOOGLE_SCRIPT_PREORDER_URL is missing. Mocking success.');
+            return new Promise(resolve => setTimeout(() => resolve({ success: true }), 1500));
+        }
+
+        try {
+            await fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(data),
+            });
+            return { success: true };
+        } catch (error) {
+            throw new Error('Failed to submit pre-order.');
+        }
+    }
+
     //---------------------------------------------------------
     // Payment specific methods (moved from paymentService.js)
     //---------------------------------------------------------
@@ -211,6 +239,7 @@ export const loginUser = (email, password) => apiService.loginUser(email, passwo
 export const submitContactForm = (formData) => apiService.submitContactForm(formData);
 export const checkApiHealth = () => apiService.checkHealth();
 export const subscribeToNewsletter = (email) => apiService.subscribeToNewsletter(email);
+export const submitPreOrder = (data) => apiService.submitPreOrder(data);
 
 // Payment exports
 export const createOrder = (amount) => apiService.createOrder(amount);
