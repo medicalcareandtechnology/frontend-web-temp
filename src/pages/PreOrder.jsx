@@ -109,7 +109,7 @@ const PreOrderFormContent = () => {
                 url="/pre-order"
             />
 
-            <div className="absolute top-6 left-6 z-20">
+            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-20">
                 <button
                     onClick={() => navigate(-1)}
                     className="group relative px-6 py-2 bg-transparent border border-[#F8F4F0] overflow-hidden rounded-full cursor-pointer transition-all duration-300"
@@ -124,7 +124,7 @@ const PreOrderFormContent = () => {
 
             <main className="flex-1 flex flex-col lg:flex-row relative">
                 {/* Left Side: Visual/Hero */}
-                <div className="lg:w-1/2 bg-[#2D2424] text-[#F8F4F0] p-12 lg:p-24 flex flex-col justify-center relative overflow-hidden min-h-[50vh] lg:min-h-screen">
+                <div className="lg:w-1/2 bg-[#2D2424] text-[#F8F4F0] p-8 md:p-12 lg:p-24 pt-20 md:pt-24 flex flex-col justify-center relative overflow-hidden min-h-[40vh] lg:min-h-screen">
                     <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#C4956A]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
                     
                     <div className="relative z-10 max-w-lg">
@@ -160,7 +160,7 @@ const PreOrderFormContent = () => {
                 </div>
 
                 {/* Right Side: Form */}
-                <div className="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-[#F8F4F0]">
+                <div className="lg:w-1/2 p-8 md:p-12 lg:p-24 flex flex-col justify-center bg-[#F8F4F0]">
                     <div className="max-w-md w-full mx-auto">
                         <AnimatePresence mode="wait">
                             {status === 'success' ? (

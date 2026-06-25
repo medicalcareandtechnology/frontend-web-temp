@@ -4,14 +4,18 @@ const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
 // Initialize Groq client with browser configuration
 let groq;
-try {
-  groq = new Groq({
-    apiKey: GROQ_API_KEY,
-    dangerouslyAllowBrowser: true // Enable client-side usage
-  });
-  console.log('Groq client initialized successfully');
-} catch (error) {
-  console.error('Failed to initialize Groq client:', error);
+if (GROQ_API_KEY) {
+  try {
+    groq = new Groq({
+      apiKey: GROQ_API_KEY,
+      dangerouslyAllowBrowser: true // Enable client-side usage
+    });
+    console.log('Groq client initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize Groq client:', error);
+  }
+} else {
+  console.warn('VITE_GROQ_API_KEY is not set in .env. Chatbot will be disabled.');
 }
 
 // Contact information for fallback
