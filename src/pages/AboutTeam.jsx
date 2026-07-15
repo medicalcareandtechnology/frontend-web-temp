@@ -66,17 +66,17 @@ const AboutTeam = () => {
         {
             name: "Rohit Kumar",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1767106111/Rohit_pnspxe.jpg",
-            role: "Founder & CEO"
+            // role: "Founder & CEO"
         },
         {
             name: "Shivansh Srivastav",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042623/Shivansh_Srivastav_Technical_zq41df.jpg",
-            role: "Khatarnak Khiladi"
+            // role: "Khatarnak Khiladi"
         },
         {
             name: "Sachin Kumar Nishad",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042643/Sachin_Kumar_Nishad_Technical_zscpou.jpg",
-            role: "Dangerous Khiladi"
+            // role: "Dangerous Khiladi"
         }
     ];
 
@@ -84,12 +84,12 @@ const AboutTeam = () => {
         {
             name: "Ritika",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410734/Ritika_zoomed_fmyjdb.jpg",
-            role: "Operations Head"
+            // role: "Operations Head"
         },
         {
             name: "Deva",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042616/Deva_Nandhan_R_D_Head_zoigy8.png",
-            role: "R&D Head"
+            // role: "R&D Head"
         }
     ];
 
@@ -97,12 +97,12 @@ const AboutTeam = () => {
         {
             name: "Subham",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769411606/sonu_zoomed_eptgjs.jpg",
-            role: "IT Head"
+            // role: "IT Head"
         },
         {
             name: "Manvendra",
             image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410669/Manvendra_vqdps2.jpg",
-            role: "Backend dev"
+            // role: "Backend dev"
         }
     ];
 
