@@ -93,16 +93,10 @@ const Shop = () => {
                         {/* Right: Product Details & Purchase */}
                         <div className="lg:w-1/2 flex flex-col justify-center">
                             {/* Header */}
-                            <div className="mb-2 flex items-center gap-2">
-                                <span className="bg-[#E8CFBA] text-[#6B5C50] text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded">New Arrival</span>
-                                <div className="flex text-[#C4956A] text-xs">
-                                    {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
-                                    <span className="text-[#8C7A6B] ml-1">(1,240+ Reviews)</span>
-                                </div>
-                            </div>
+
 
                             <h1 className="text-4xl md:text-6xl font-serif font-medium text-[#2D2424] mb-4 leading-tight">
-                                Ease Band
+                                EaseBand
                             </h1>
                             <p className="text-xl text-[#6B5C50] font-light mb-8 max-w-md leading-relaxed">
                                 Relief that moves with you. The intelligent wearable for natural, instant comfort.
