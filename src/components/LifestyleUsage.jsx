@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const baseUseCases = [
     {
@@ -187,6 +188,24 @@ const LifestyleUsage = () => {
                             );
                         })}
                     </AnimatePresence>
+                </div>
+
+                {/* Carousel Navigation Buttons */}
+                <div className="flex justify-center items-center gap-6 mt-12">
+                    <button 
+                        onClick={shiftLeft}
+                        className="w-14 h-14 rounded-full border border-[#3B302C]/25 flex items-center justify-center text-[#3B302C] hover:bg-[#3B302C] hover:text-[#FAF9F6] hover:border-[#3B302C] transition-all duration-300 shadow-sm group bg-[#FAF9F6]"
+                        aria-label="Previous Slide"
+                    >
+                        <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+                    </button>
+                    <button 
+                        onClick={shiftRight}
+                        className="w-14 h-14 rounded-full border border-[#3B302C]/25 flex items-center justify-center text-[#3B302C] hover:bg-[#3B302C] hover:text-[#FAF9F6] hover:border-[#3B302C] transition-all duration-300 shadow-sm group bg-[#FAF9F6]"
+                        aria-label="Next Slide"
+                    >
+                        <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+                    </button>
                 </div>
             </div>
         </section>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
-const TeamSection = ({ title, members, delay = 0 }) => (
+const TeamSection = ({ title, members, delay = 0, gridColsClass = "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" }) => (
     <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ const TeamSection = ({ title, members, delay = 0 }) => (
             <div className="h-px flex-grow bg-gradient-to-r from-blue-500/30 to-transparent" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className={`grid ${gridColsClass} gap-8`}>
             {members.map((member, index) => (
                 <motion.div
                     key={member.name}
@@ -50,7 +50,11 @@ const TeamSection = ({ title, members, delay = 0 }) => (
                     <h4 className="text-lg font-light tracking-[0.1em] text-white group-hover:text-blue-400 transition-colors duration-300">
                         {member.name}
                     </h4>
-                    {/* Role display removed */}
+                    {member.role && (
+                        <p className="text-xs text-gray-400 tracking-[0.2em] uppercase mt-1">
+                            {member.role}
+                        </p>
+                    )}
                 </motion.div>
             ))}
         </div>
@@ -58,44 +62,47 @@ const TeamSection = ({ title, members, delay = 0 }) => (
 );
 
 const AboutTeam = () => {
-    const technicalTeam = [
+    const technicalUnit = [
         {
             name: "Rohit Kumar",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1767106111/Rohit_pnspxe.jpg"
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1767106111/Rohit_pnspxe.jpg",
+            role: "Founder & CEO"
         },
         {
-            name: "Sudhanshu",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769606159/Sudhanshu_dukxgi.jpg"
+            name: "Shivansh Srivastav",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042623/Shivansh_Srivastav_Technical_zq41df.jpg",
+            role: "Khatarnak Khiladi"
+        },
+        {
+            name: "Sachin Kumar Nishad",
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042643/Sachin_Kumar_Nishad_Technical_zscpou.jpg",
+            role: "Dangerous Khiladi"
         }
     ];
 
-    const rdTeam = [
+    const rdUnit = [
         {
             name: "Ritika",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410734/Ritika_zoomed_fmyjdb.jpg"
-        },
-        {
-            name: "Prapti",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410653/Prapti_vjdop6.jpg"
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410734/Ritika_zoomed_fmyjdb.jpg",
+            role: "Operations Head"
         },
         {
             name: "Deva",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410658/Deva_pic_full_rv77ig.jpg"
-        },
-        {
-            name: "Sneha",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769606160/Sneha_lxtyyd.jpg"
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1784042616/Deva_Nandhan_R_D_Head_zoigy8.png",
+            role: "R&D Head"
         }
     ];
 
-    const itTeam = [
+    const itUnit = [
         {
             name: "Subham",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769411606/sonu_zoomed_eptgjs.jpg"
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769411606/sonu_zoomed_eptgjs.jpg",
+            role: "IT Head"
         },
         {
             name: "Manvendra",
-            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410669/Manvendra_vqdps2.jpg"
+            image: "https://res.cloudinary.com/dkganhypn/image/upload/v1769410669/Manvendra_vqdps2.jpg",
+            role: "Backend dev"
         }
     ];
 
@@ -126,9 +133,26 @@ const AboutTeam = () => {
                         </p>
                     </motion.div>
 
-                    <TeamSection title="Technical Unit" members={technicalTeam} delay={0.2} />
-                    <TeamSection title="Research & Development Unit" members={rdTeam} delay={0.4} />
-                    <TeamSection title="IT Unit" members={itTeam} delay={0.6} />
+                    <TeamSection 
+                        title="Technical Unit" 
+                        members={technicalUnit} 
+                        delay={0.2} 
+                        gridColsClass="grid-cols-1 sm:grid-cols-3 max-w-4xl mx-auto" 
+                    />
+                    
+                    <TeamSection 
+                        title="R&D Unit" 
+                        members={rdUnit} 
+                        delay={0.3} 
+                        gridColsClass="grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto" 
+                    />
+                    
+                    <TeamSection 
+                        title="IT Unit" 
+                        members={itUnit} 
+                        delay={0.4} 
+                        gridColsClass="grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto" 
+                    />
 
                 </div>
             </div>

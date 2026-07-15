@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('NeoMotion App Tests', () => {
   
-  test('should redirect /shop to /coming-soon', async ({ page }) => {
+  test('should navigate to /shop', async ({ page }) => {
     // Go to home page
     await page.goto('/');
 
@@ -10,11 +10,11 @@ test.describe('NeoMotion App Tests', () => {
     const shopLink = page.getByRole('link', { name: /shop/i }).first();
     await shopLink.click();
 
-    // Verify the URL redirects to /coming-soon
-    await expect(page).toHaveURL(/.*coming-soon/);
+    // Verify the URL is /shop
+    await expect(page).toHaveURL(/.*shop/);
 
-    // Verify "Coming Soon" page header is visible
-    await expect(page.getByText('Coming Soon')).toBeVisible();
+    // Verify shop page content (e.g. Pre-order button text)
+    await expect(page.getByText(/PRE-ORDER Ease Band/i).first()).toBeVisible();
   });
 
   test('should not show App Store and Play Store buttons in Easeflow section', async ({ page }) => {
@@ -67,6 +67,15 @@ test.describe('NeoMotion App Tests', () => {
       });
     });
 
+    // Mock Google Apps Script contact URL
+    await page.route('**/macros/s/**', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true }),
+      });
+    });
+
     // Go to contact page
     await page.goto('/contact');
 
@@ -90,12 +99,12 @@ test.describe('NeoMotion App Tests', () => {
     await page.goto('/');
     await expect(page).toHaveTitle(/MCT/i);
 
-    // Navigate to Team page via Navbar link
-    const teamLink = page.getByRole('link', { name: /^team$/i }).first();
-    await teamLink.click();
+    // Verify Team page direct access (since navbar button is hidden)
+    await page.goto('/team');
     await expect(page).toHaveURL(/.*team/);
 
     // Navigate to Contact page via Navbar link
+    await page.goto('/');
     const contactLink = page.getByRole('link', { name: /^contact$/i }).first();
     await contactLink.click();
     await expect(page).toHaveURL(/.*contact/);

@@ -49,15 +49,15 @@ const Footer = () => {
                                 </a>
                             </li>
                             <li>
-                                <Link to="/coming-soon" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
+                                <Link to="/shop" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
                                     Shop
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/team" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
                                     Team
                                 </Link>
-                            </li>
+                            </li> */}
 
                             <li>
                                 <Link to="/contact" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
@@ -127,10 +127,18 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-blue-500/10 pt-8 text-center">
+                <div className="border-t border-blue-500/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                     <p className="text-sm text-gray-500 font-light tracking-wide">
                         © {currentYear} <span className="text-blue-400">MCT</span>. All rights reserved.
                     </p>
+                    <div className="flex gap-6 text-sm text-gray-500 font-light tracking-wide">
+                        <Link to="/privacy" className="hover:text-blue-400 transition-colors">
+                            Privacy Policy
+                        </Link>
+                        <Link to="/terms" className="hover:text-blue-400 transition-colors">
+                            Terms & Conditions
+                        </Link>
+                    </div>
                 </div>
             </div>
         </footer>

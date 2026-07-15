@@ -111,8 +111,8 @@ const Shop = () => {
                             {/* Price Block */}
                             <div className="bg-[#F2EAE4] p-6 rounded-xl mb-8 max-w-md">
                                 <div className="flex items-baseline gap-3 mb-2">
-                                    <span className="text-4xl font-bold text-[#2D2424]">₹1,999</span>
-                                    <span className="text-lg text-[#8C7A6B] line-through">₹4,999</span>
+                                    <span className="text-4xl font-bold text-[#2D2424]">₹1,499</span>
+                                    <span className="text-lg text-[#8C7A6B] line-through">₹3,000</span>
                                     <span className="text-[#6B5C50] text-sm font-medium bg-[#E8CFBA]/60 px-2 py-1 rounded">-60% OFF</span>
                                 </div>
                                 <p className="text-xs text-[#8C7A6B] mb-4">Inclusive of all taxes. Free shipping across India.</p>
@@ -259,37 +259,6 @@ const Shop = () => {
                 </div>
             </section>
 
-            {/* 5. SECTION D: PROOF / TRUST */}
-            <section className="py-24 bg-[#F2EAE4]">
-                <div className="container mx-auto px-6 max-w-4xl text-center">
-                    <div className="flex justify-center text-[#C4956A] mb-6 gap-1">
-                        {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="currentColor" size={24} />)}
-                    </div>
-                    <h2 className="text-2xl md:text-4xl font-serif text-[#2D2424] mb-6">
-                        "I used to take leave every month. Now I just take my Ease Band."
-                    </h2>
-                    <div className="flex items-center justify-center gap-4 mb-16">
-                        <div className="w-12 h-12 bg-[#E8CFBA] rounded-full overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="User" />
-                        </div>
-                        <div className="text-left">
-                            <div className="font-bold text-[#2D2424] text-sm">Priya S.</div>
-                            <div className="text-xs text-[#8C7A6B] uppercase tracking-wider">Verified Purchase • Bangalore</div>
-                        </div>
-                    </div>
-
-                    <div className="pt-12">
-                        <p className="text-xs font-bold text-[#8C7A6B] uppercase tracking-widest mb-6">Secured & Powered By</p>
-                        <div className="flex justify-center gap-8 opacity-50 grayscale">
-                            {/* Replaced with text placeholders for reliability if SVGs missing */}
-                            <span className="font-bold text-xl text-[#2D2424]">Razorpay</span>
-                            <span className="font-bold text-xl text-[#2D2424]">UPI</span>
-                            <span className="font-bold text-xl text-[#2D2424]">VISA</span>
-                            <span className="font-bold text-xl text-[#2D2424]">RuPay</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* 6. SECTION E: FINAL CTA (Immersive Anchor) */}
             <section className="py-32 bg-[#050505] text-[#F8F4F0] relative overflow-hidden">
@@ -314,7 +283,7 @@ const Shop = () => {
                                 className="group relative px-12 py-5 border border-[#F8F4F0] overflow-hidden rounded-none min-w-[280px] transition-all duration-300 bg-transparent cursor-pointer"
                             >
                                 <span className="relative z-10 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 flex justify-center items-center gap-3 text-[#F8F4F0] group-hover:text-[#2D2424]">
-                                    PRE-ORDER Ease Band — ₹1,999
+                                    PRE-ORDER Ease Band — ₹1,499
                                 </span>
                                 <div className="absolute inset-0 bg-[#F8F4F0] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             </button>

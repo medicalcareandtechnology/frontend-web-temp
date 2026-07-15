@@ -12,7 +12,7 @@ const SEO = ({ title, description, keywords, url }) => {
             {/* Basic Meta Tags - React 19 supports these directly in render */}
             <title>{displayTitle}</title>
             <meta name="description" content={description || defaultDescription} />
-            <meta name="keywords" content={keywords || 'menstrual relief, wearable technology, MCT, Ease Band, pain relief, health tech'} />
+            <meta name="keywords" content={keywords || 'menstrual relief, wearable technology, MCT, Ease Band, pain relief, health tech, therapeutic belt'} />
             <link rel="canonical" href={currentUrl} />
 
             {/* Open Graph (Facebook/LinkedIn) */}

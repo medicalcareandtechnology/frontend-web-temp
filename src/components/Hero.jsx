@@ -74,7 +74,7 @@ const Hero = () => {
                             }}
                             className="text-[14vw] md:text-[12vw] text-white tracking-tight leading-none whitespace-nowrap origin-center select-none font-medium"
                         >
-                            EASE BAND
+                            EASEBAND
                         </motion.h1>
 
                     {/* Secondary Content - Centered below title with gap */}
