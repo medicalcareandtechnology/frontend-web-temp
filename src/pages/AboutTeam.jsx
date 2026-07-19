@@ -129,7 +129,7 @@ const AboutTeam = () => {
                             The Team
                         </h1>
                         <p className="text-sm md:text-base text-gray-400 font-light tracking-[0.2em] uppercase max-w-2xl mx-auto leading-relaxed">
-                            The minds behind ease band. Dedicated to innovation, designed for relief.
+                            The minds behind easeband. Dedicated to innovation, designed for relief.
                         </p>
                     </motion.div>
 

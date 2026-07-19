@@ -1,142 +1,163 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-black text-white border-t border-blue-500/20 pt-20 pb-8 relative overflow-hidden">
+        <footer className="bg-[#0a0a0b] text-neutral-300 min-h-screen flex flex-col justify-between pt-0 pb-12 relative overflow-hidden border-t border-neutral-900/60">
+            {/* Extremely subtle blue radial ambient glow at the bottom center */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(59,130,246,0.03),transparent_60%)] pointer-events-none" />
 
-            <div className="container mx-auto px-6 md:px-12 relative z-10">
-                {/* Top Divider */}
-                <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                    className="h-px w-full bg-gradient-to-r from-transparent via-blue-500/30 to-transparent mb-16"
-                />
+            {/* Loop Marquee Banner at the top of the footer */}
+            <div className="w-full overflow-hidden border-b border-neutral-900/60 py-8 md:py-10 select-none bg-black/20">
+                <div className="flex whitespace-nowrap overflow-hidden">
+                    <motion.div
+                        animate={{ x: [0, "-50%"] }}
+                        transition={{
+                            repeat: Infinity,
+                            ease: "linear",
+                            duration: 22
+                        }}
+                        className="flex gap-12 md:gap-16 text-[10vw] md:text-[8vw] font-barlow font-black text-[#ffffff] uppercase tracking-tight select-none pr-12 md:pr-16 shrink-0"
+                    >
+                        <span>Get in touch</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span className="text-[#3b82f6]">MCT</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span>Get in touch</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span className="text-[#3b82f6]">MCT</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        {/* Duplicate content for seamless scrolling loop */}
+                        <span>Get in touch</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span className="text-[#3b82f6]">MCT</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span>Get in touch</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                        <span className="text-[#3b82f6]">MCT</span>
+                        <span className="text-neutral-800 font-light">/</span>
+                    </motion.div>
+                </div>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-                    {/* Brand Section */}
-                    <div>
-                        <Link to="/" className="inline-block mb-4">
-                            <img
-                                src="https://res.cloudinary.com/dkganhypn/image/upload/v1769610206/logo_long-removebg_ssuij7.png"
-                                alt="MCT Logo"
-                                className="h-16 md:h-20 w-auto"
-                            />
-                        </Link>
-                        <p className="text-sm text-gray-400 font-light leading-relaxed max-w-xs">
-                            Medical-grade relief for menstrual pain. Designed with care, engineered for comfort.
-                        </p>
+            <div className="container mx-auto px-6 md:px-12 relative z-10 flex-1 flex flex-col justify-center py-16">
+                {/* Main Content Layout */}
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-8 w-full">
+                    {/* Brand Logo column */}
+                    <div className="relative inline-block select-none">
+                        <img
+                            src="/logo.png"
+                            alt="MCT Logo"
+                            className="w-24 h-24 md:w-32 md:h-32 object-contain brightness-95 hover:brightness-100 transition-all duration-300"
+                        />
+                        <span className="absolute top-0 -right-2 text-xs font-light text-neutral-500">®</span>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="text-sm font-medium tracking-[0.2em] uppercase mb-6 text-blue-400">Navigation</h3>
-                        <ul className="space-y-3">
-                            <li>
-                                <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="#features" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
-                                    Learn More
-                                </a>
-                            </li>
-                            <li>
-                                <Link to="/shop" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
-                                    Shop
-                                </Link>
-                            </li>
-                            {/* <li>
-                                <Link to="/team" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
-                                    Team
-                                </Link>
-                            </li> */}
+                    {/* Navigation Columns Grid - 3 Columns (Products removed, clean structure) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-12 flex-1 max-w-3xl lg:ml-20">
+                        {/* Column 1: Visit us */}
+                        <div className="space-y-4">
+                            <h4 className="text-xs font-bold tracking-[0.2em] text-neutral-400 uppercase font-barlow">
+                                Visit us
+                            </h4>
+                            <div className="text-sm text-neutral-400 font-light leading-relaxed space-y-1.5">
+                                <p>Medical Care & Technology</p>
+                                <p>Chandigarh, India</p>
+                                <p className="pt-2">
+                                    <a href="mailto:mct.medtech@gmail.com" className="hover:text-[#3b82f6] text-neutral-300 transition-colors duration-300 font-normal">
+                                        mct.medtech@gmail.com
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="tel:8699715686" className="hover:text-[#3b82f6] text-neutral-300 transition-colors duration-300 font-normal">
+                                        +91 8699715686
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
 
-                            <li>
-                                <Link to="/contact" className="text-gray-400 hover:text-blue-400 transition-colors text-sm font-light tracking-wide">
-                                    Contact
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                        {/* Column 2: Sitemap */}
+                        <div className="space-y-4">
+                            <h4 className="text-xs font-bold tracking-[0.2em] text-neutral-400 uppercase font-barlow">
+                                Sitemap
+                            </h4>
+                            <ul className="space-y-3">
+                                <li>
+                                    <Link to="/" className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-normal">
+                                        Home
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/shop" className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-normal">
+                                        Shop
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/team" className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-normal">
+                                        About Team
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
 
-                    {/* Contact Info */}
-                    <div>
-                        <h3 className="text-sm font-medium tracking-[0.2em] uppercase mb-6 text-blue-400">Get in Touch</h3>
-                        <ul className="space-y-4">
-                            <li className="flex items-center gap-3 text-gray-400 group">
-                                <Mail className="w-4 h-4 text-blue-500 shrink-0" />
-                                <a href="mailto:mct.medtech@gmail.com" className="hover:text-blue-400 transition-colors text-sm font-light">
-                                    mct.medtech@gmail.com
-                                </a>
-                            </li>
-                            <li className="flex items-center gap-3 text-gray-400 group">
-                                <Phone className="w-4 h-4 text-blue-500 shrink-0" />
-                                <a href="tel:8699715686" className="hover:text-blue-400 transition-colors text-sm font-light">
-                                    8699715686
-                                </a>
-                            </li>
-                        </ul>
-
-                        {/* Social Icons */}
-                        <div className="flex gap-6 mt-8">
-                            <a
-                                href="https://www.instagram.com/medicalcaretechnology/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group"
-                            >
-                                <svg
-                                    className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                </svg>
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/company/mct-medcaretech/about/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group"
-                            >
-                                <svg
-                                    className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors duration-300"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor" // Using fill for LinkedIn for a more solid look if preferred, or stroke for consistency. Let's stick to consistent stroke for now but maybe slightly different path.
-                                >
-                                    {/* Actually, for LinkedIn, a solid fill often looks better than outlines. Let's try a clean path. */}
-                                    <path fill="currentColor" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                            </a>
+                        {/* Column 3: Socials */}
+                        <div className="space-y-4">
+                            <h4 className="text-xs font-bold tracking-[0.2em] text-neutral-400 uppercase font-barlow">
+                                Socials
+                            </h4>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a
+                                        href="https://www.instagram.com/medicalcaretechnology/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-normal"
+                                    >
+                                        Instagram
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://www.linkedin.com/company/mct-medcaretech/about/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-normal"
+                                    >
+                                        LinkedIn
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
 
-                {/* Bottom Bar */}
-                <div className="border-t border-blue-500/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-                    <p className="text-sm text-gray-500 font-light tracking-wide">
-                        © {currentYear} <span className="text-blue-400">MCT</span>. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-sm text-gray-500 font-light tracking-wide">
-                        <Link to="/privacy" className="hover:text-blue-400 transition-colors">
-                            Privacy Policy
+                    {/* Scroll to Top button */}
+                    <div className="flex justify-end items-center self-stretch lg:self-start lg:pt-1">
+                        <button
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="w-12 h-12 rounded-full border border-neutral-800 hover:border-neutral-500 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-neutral-900 transition-all duration-300 cursor-pointer"
+                            aria-label="Scroll to top"
+                        >
+                            <ArrowUp className="w-5 h-5" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom Bar: Copyright & Terms */}
+            <div className="container mx-auto px-6 md:px-12 relative z-10 w-full select-none">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500 uppercase tracking-widest pt-8 border-t border-neutral-900/60 font-light w-full">
+                    <p>© Medical Care and Technology® {currentYear}</p>
+                    <div className="flex gap-4 items-center">
+                        <Link to="/privacy" className="hover:text-white transition-colors duration-300">
+                            Privacy
                         </Link>
-                        <Link to="/terms" className="hover:text-blue-400 transition-colors">
-                            Terms & Conditions
+                        <span className="text-neutral-800">/</span>
+                        <Link to="/terms" className="hover:text-white transition-colors duration-300">
+                            Terms
                         </Link>
                     </div>
                 </div>

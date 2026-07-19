@@ -1,11 +1,11 @@
 import React from 'react';
 
 const SEO = ({ title, description, keywords, url }) => {
-    const siteTitle = 'MCT - Ease Band';
+    const siteTitle = 'MCT - EaseBand';
     const displayTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-    const defaultDescription = 'MCT Ease Band - A revolutionary wearable for menstrual pain relief. Designed with care, engineered for comfort.';
+    const defaultDescription = 'MCT EaseBand - A revolutionary wearable for menstrual pain relief. Designed with care, engineered for comfort.';
     const siteUrl = 'https://medcaretech.in'; // Placeholder, user can update
-    const currentUrl = url ? `${siteUrl}${url}` : siteUrl;
+    const currentUrl = url ? `${siteUrl}${url}` : siteUrl
 
     return (
         <>

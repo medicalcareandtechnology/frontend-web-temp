@@ -115,7 +115,7 @@ const LifestyleUsage = () => {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="text-[#8B7355] text-xs md:text-sm font-medium tracking-[0.3em] uppercase"
                 >
-                    Ease Band adapts to your routine
+                    EaseBand adapts to your routine
                 </motion.p>
             </div>
 

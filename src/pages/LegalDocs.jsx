@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 
 export const PrivacyPolicy = () => {
     return (
-        <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+        <div className="bg-[#FAF9F6] min-h-screen text-neutral-800 selection:bg-neutral-800 selection:text-[#FAF9F6] [&_h2]:text-[#3B302C] [&_h3]:text-[#3B302C] [&_a]:text-[#B58B80] [&_a]:hover:text-[#8b6e60] [&_div.h-px]:bg-none [&_div.h-px]:bg-neutral-200/60">
             <SEO
                 title="Privacy Policy"
                 description="Privacy Policy for EaseBand and Easeflow by Medical Care & Technology."
@@ -14,7 +14,7 @@ export const PrivacyPolicy = () => {
 
             <div className="pt-32 pb-20 px-6 md:px-12 relative overflow-hidden">
                 {/* Background Ambient Glow */}
-                <div className="absolute top-0 left-0 w-full h-[600px] bg-blue-900/5 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-[600px] bg-[#B58B80]/5 rounded-full blur-[120px] pointer-events-none" />
 
                 <div className="container mx-auto max-w-4xl relative z-10">
                     <motion.div
@@ -23,13 +23,13 @@ export const PrivacyPolicy = () => {
                         transition={{ duration: 1 }}
                         className="text-center mb-16"
                     >
-                        <h1 className="text-4xl md:text-6xl font-light tracking-[0.1em] font-serif mb-4">
+                        <h1 className="text-4xl md:text-6xl font-light tracking-[0.1em] font-serif mb-4 text-[#3B302C]">
                             Privacy Policy
                         </h1>
-                        <p className="text-sm md:text-base text-blue-400 font-light tracking-[0.2em] uppercase">
+                        <p className="text-sm md:text-base text-[#B58B80] font-light tracking-[0.2em] uppercase">
                             EaseBand and Easeflow
                         </p>
-                        <p className="text-xs text-gray-500 tracking-[0.1em] uppercase mt-2">
+                        <p className="text-xs text-neutral-500 tracking-[0.1em] uppercase mt-2">
                             A Product of Medical Care & Technology
                         </p>
                     </motion.div>
@@ -38,7 +38,7 @@ export const PrivacyPolicy = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="prose prose-invert max-w-none space-y-10 text-gray-300 font-light leading-relaxed text-sm md:text-base"
+                        className="prose prose-stone max-w-none space-y-10 text-neutral-600 font-light leading-relaxed text-sm md:text-base"
                     >
                         <section className="space-y-4">
                             <p>
@@ -48,7 +48,7 @@ export const PrivacyPolicy = () => {
                                 We want to make sure that you know how we collect and use your information when you use EaseBand and Easeflow.
                             </p>
                             <p>
-                                Our address is RZ-29A, KH. N).-137, GALI No.-1, DURGA PARK, Palam Village, New Delhi - 110045. If you have any questions about this policy you can email us at <a href="mailto:support@medcaretech.in" className="text-blue-400 hover:underline">support@medcaretech.in</a>.
+                                Our address is RZ-29A, KH. No.-137, GALI No.-1, DURGA PARK, Palam Village, New Delhi - 110045. If you have any questions about this policy you can email us at <a href="mailto:support@medcaretech.in" className="text-blue-400 hover:underline">support@medcaretech.in</a>.
                             </p>
                             <p>
                                 This policy is part of our terms and conditions. When you use EaseBand and Easeflow you are agreeing to this policy.
@@ -309,7 +309,7 @@ export const PrivacyPolicy = () => {
 
 export const TermsConditions = () => {
     return (
-        <div className="bg-[#0a0a0a] min-h-screen text-white selection:bg-white selection:text-black">
+        <div className="bg-[#FAF9F6] min-h-screen text-neutral-800 selection:bg-neutral-800 selection:text-[#FAF9F6] [&_h2]:text-[#3B302C] [&_h3]:text-[#3B302C] [&_a]:text-[#B58B80] [&_a]:hover:text-[#8b6e60] [&_div.h-px]:bg-none [&_div.h-px]:bg-neutral-200/60">
             <SEO
                 title="Terms and Conditions"
                 description="Terms and Conditions for EaseBand and Easeflow by Medical Care & Technology."
@@ -318,7 +318,7 @@ export const TermsConditions = () => {
 
             <div className="pt-32 pb-20 px-6 md:px-12 relative overflow-hidden">
                 {/* Background Ambient Glow */}
-                <div className="absolute top-0 left-0 w-full h-[600px] bg-blue-900/5 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-[600px] bg-[#B58B80]/5 rounded-full blur-[120px] pointer-events-none" />
 
                 <div className="container mx-auto max-w-4xl relative z-10">
                     <motion.div
@@ -327,13 +327,13 @@ export const TermsConditions = () => {
                         transition={{ duration: 1 }}
                         className="text-center mb-16"
                     >
-                        <h1 className="text-4xl md:text-6xl font-light tracking-[0.1em] font-serif mb-4">
+                        <h1 className="text-4xl md:text-6xl font-light tracking-[0.1em] font-serif mb-4 text-[#3B302C]">
                             Terms and Conditions
                         </h1>
-                        <p className="text-sm md:text-base text-blue-400 font-light tracking-[0.2em] uppercase">
+                        <p className="text-sm md:text-base text-[#B58B80] font-light tracking-[0.2em] uppercase">
                             EaseBand and Easeflow
                         </p>
-                        <p className="text-xs text-gray-500 tracking-[0.1em] uppercase mt-2">
+                        <p className="text-xs text-neutral-500 tracking-[0.1em] uppercase mt-2">
                             A Product of Medical Care & Technology
                         </p>
                     </motion.div>
@@ -342,7 +342,7 @@ export const TermsConditions = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="prose prose-invert max-w-none space-y-10 text-gray-300 font-light leading-relaxed text-sm md:text-base"
+                        className="prose prose-stone max-w-none space-y-10 text-neutral-600 font-light leading-relaxed text-sm md:text-base"
                     >
                         <section className="space-y-4">
                             <p>

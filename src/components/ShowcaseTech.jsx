@@ -116,7 +116,7 @@ const ShowcaseTech = () => {
                                         <div className="h-px w-20 bg-[#B58B80] mb-5" />
                                         <h3 className="text-xl font-light text-[#3B302C] mb-3 tracking-[0.1em] uppercase">Soothing Warmth</h3>
                                         <p className="text-[#5A504C] leading-relaxed font-light text-base max-w-xs">
-                                            Instant, enveloping heat reaches 45°C in 15 seconds. Intelligent monitoring ensures perfectly sustained comfort.
+                                            Instant, enveloping heat reaches 45°C in 5 seconds. Intelligent monitoring ensures perfectly sustained comfort.
                                         </p>
                                     </div>
                                 </div>

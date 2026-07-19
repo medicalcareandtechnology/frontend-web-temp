@@ -9,7 +9,7 @@ const Navbar = ({ toggleChatbot }) => {
     const location = useLocation();
     
     // Determine if we should use dark text based on route
-    const darkRoutes = ['/shop', '/login', '/register', '/contact'];
+    const darkRoutes = ['/shop', '/login', '/register', '/contact', '/terms', '/privacy'];
     const useDarkText = darkRoutes.includes(location.pathname);
 
     const isHomePage = location.pathname === '/';
@@ -18,11 +18,26 @@ const Navbar = ({ toggleChatbot }) => {
     const isTeamPage = location.pathname === '/team';
     const isComingSoonPage = location.pathname === '/coming-soon';
 
+    const [showNavbar, setShowNavbar] = useState(true);
+
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 100);
+            const currentScrollY = window.scrollY;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            
+            // Hide navbar if scrolled within 180px of the footer bottom
+            const isNearBottom = currentScrollY + clientHeight >= scrollHeight - 200;
+            
+            if (isNearBottom) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+            
+            setIsScrolled(currentScrollY > 100);
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -32,7 +47,9 @@ const Navbar = ({ toggleChatbot }) => {
 
     return (
         <motion.nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
+            animate={{ y: showNavbar ? 0 : -120 }}
+            transition={{ type: "spring", stiffness: 140, damping: 22 }}
+            className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,padding] duration-500 ease-in-out ${isScrolled
                 ? 'bg-black/95 backdrop-blur-xl py-4'
                 : 'bg-transparent py-8'
                 }`}
