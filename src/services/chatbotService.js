@@ -10,6 +10,7 @@ if (GROQ_API_KEY) {
       apiKey: GROQ_API_KEY,
       dangerouslyAllowBrowser: true // Enable client-side usage
     });
+    console.log('Groq client initialized successfully');
   } catch (error) {
     console.error('Failed to initialize Groq client:', error);
   }
